@@ -1,0 +1,130 @@
+{
+  "formatVersion": 1,
+  "database": {
+    "version": 1,
+    "identityHash": "5ca4568e965d8afc298c4de3f0917386",
+    "entities": [
+      {
+        "tableName": "articles",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`title` TEXT NOT NULL, `section` TEXT, `subsection` TEXT, `description` TEXT, `url` TEXT, `author` TEXT NOT NULL, `item_type` TEXT, `updated_date` TEXT, `created_date` TEXT, `publish_date` TEXT, `material_type_facet` TEXT, `kicker` TEXT, `des_facet` TEXT, `org_facet` TEXT, `per_facet` TEXT, `geo_facet` TEXT, `multimedia` TEXT, PRIMARY KEY(`title`, `author`))",
+        "fields": [
+          {
+            "fieldPath": "title",
+            "columnName": "title",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "section",
+            "columnName": "section",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "subsection",
+            "columnName": "subsection",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "description",
+            "columnName": "description",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "url",
+            "columnName": "url",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "author",
+            "columnName": "author",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "itemType",
+            "columnName": "item_type",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "updatedDate",
+            "columnName": "updated_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "createdDate",
+            "columnName": "created_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "publishDate",
+            "columnName": "publish_date",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "materialTypeFacet",
+            "columnName": "material_type_facet",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "kicker",
+            "columnName": "kicker",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "descriptionFacet",
+            "columnName": "des_facet",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "organizationFacet",
+            "columnName": "org_facet",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "personFacet",
+            "columnName": "per_facet",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "geographyFacet",
+            "columnName": "geo_facet",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "multimedia",
+            "columnName": "multimedia",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "title",
+            "author"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      }
+    ],
+    "setupQueries": [
+      "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, \"5ca4568e965d8afc298c4de3f0917386\")"
+    ]
+  }
+}

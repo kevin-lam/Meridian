@@ -38,10 +38,28 @@ ext {
     buildToolsVersion = '27.0.3'
 
     // App dependencies
-    supportLibraryVersion = '26.0.2'
+    supportLibraryVersion = '26.1.0'
+    constraintLayoutVersion = '1.1.3'
+
+    // Architectural components
+    architecturalComponentsVersion = '1.1.1'
+
+    // Dependency injection
+    daggerVersion = '2.17'
+
+    // Networking
+    retrofitVersion = '2.4.0'
+    gsonVersion = '2.8.5'
+    rxjavaVersion = '2.2.2'
+    okhttpVersion = '3.11.0'
+
+    // Logging
+    timberVersion = '4.7.1'
 
     // Test dependencies
     junitVersion = '4.12'
-    junitRunnerVersion = '1.0.2'
-    expressoVersion = '3.0.2'
+    hamcrestVersion = '1.3'
+    junitRunnerVersion = '1.0.1'
+    junitRulesVersion = '1.0.1'
+    expressoVersion = '3.0.1'
 }

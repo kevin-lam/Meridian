@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_entry_content_image_guideline_percent">0.70</dimen>
+</resources>
