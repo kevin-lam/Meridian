@@ -9,8 +9,12 @@ import dagger.Module;
 import dagger.Provides;
 import kevinlamcs.android.com.meridian.data.local.DatabaseModule;
 import kevinlamcs.android.com.meridian.data.remote.NetworkModule;
+import kevinlamcs.android.com.meridian.util.UtilModule;
+import kevinlamcs.android.com.meridian.util.image.ImageModule;
 
-@Module(includes = {ViewModelModule.class, NetworkModule.class, DatabaseModule.class})
+@Module(includes = {
+        ViewModelModule.class, NetworkModule.class, DatabaseModule.class, ImageModule.class
+})
 public class AppModule {
     @Provides
     @Singleton

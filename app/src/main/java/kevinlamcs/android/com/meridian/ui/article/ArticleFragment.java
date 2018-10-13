@@ -34,7 +34,12 @@ public class ArticleFragment extends BaseFragment {
     }
 
     @Override
-    public void observeViewModelChanges() {
+    public void subscribeToViewModelChanges() {
+
+    }
+
+    @Override
+    public void setUpPostViewCreated() {
 
     }
 }

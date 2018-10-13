@@ -1,21 +1,45 @@
 package kevinlamcs.android.com.meridian.ui.article;
 
+import android.Manifest;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
+
+import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 
 import javax.inject.Inject;
 
+import butterknife.BindString;
+import butterknife.BindView;
 import kevinlamcs.android.com.meridian.R;
+import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseFragment;
 
 public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel> {
 
     public static final String TAG = ArticleListingFragment.class.getSimpleName();
 
+    @BindView(R.id.articles)
+    RecyclerView articleRecyclerView;
+
+    @BindString(R.string.load_article_rationale)
+    String loadArticleRationale;
+
+    @Inject
+    LinearLayoutManager linearLayoutManager;
+
+    @Inject
+    ArticleListingAdapter articleListingAdapter;
+
     @Inject
     ViewModelProvider.Factory viewModelFactory;
+
+    @Inject
+    RecyclerViewPreloader<Article> preloader;
 
     private ArticleListingViewModel articleListingViewModel;
 
@@ -39,13 +63,23 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     @Override
-    public void observeViewModelChanges() {
+    public void setUpPostViewCreated() {
+        articleRecyclerView.setLayoutManager(linearLayoutManager);
+        articleRecyclerView.setAdapter(articleListingAdapter);
+        articleRecyclerView.addOnScrollListener(preloader);
+    }
 
+    @Override
+    public void subscribeToViewModelChanges() {
+        articleListingViewModel.getArticles()
+            .observe(this, articles -> articleListingAdapter.setArticles(articles));
     }
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        if (firstTimeCreated(savedInstanceState)) articleListingViewModel.load("FRONTPAGE");
+        if (firstTimeCreated(savedInstanceState)) {
+            requestPermission(loadArticleRationale, articleListingViewModel, Manifest.permission.INTERNET);
+        }
     }
 }

@@ -83,7 +83,7 @@ public class ArticleDatabaseTest {
         article.setTitle("Test title");
         article.setAuthor("By testAuthor");
 
-        dao.insert(article);
+        dao.add(article);
         assertThat(doSynchronous(dao.list()).size(), is(not(0)));
     }
 
@@ -97,7 +97,7 @@ public class ArticleDatabaseTest {
         article2.setTitle("Test2");
         article2.setAuthor("By author2");
         List<Article> articles = Arrays.asList(article1, article2);
-        dao.insertAll(articles);
+        dao.addAll(articles);
         assertThat(doSynchronous(dao.list()).size(), is(not(0)));
     }
 
@@ -110,20 +110,8 @@ public class ArticleDatabaseTest {
         article.setAuthor("By author");;
         article.setDescriptionFacet(articleTopic);
 
-        dao.insert(article);
+        dao.add(article);
         assertThat(doSynchronous(dao.listByTopic("%Politics%")).size(), is(not(0)));
-    }
-
-    @Test
-    public void testListArticleBySection() throws InterruptedException {
-
-        Article article = new Article();
-        article.setTitle("Test");
-        article.setAuthor("By author");;
-        article.setSection("Books");
-
-        dao.insert(article);
-        assertThat(doSynchronous(dao.listBySection("Books")).size(), is(not(0)));
     }
 
     @Test
@@ -132,7 +120,7 @@ public class ArticleDatabaseTest {
         article.setTitle("Test");
         article.setAuthor("By author");
 
-        dao.insert(article);
+        dao.add(article);
         dao.clear();
         assertThat(doSynchronous(dao.list()).size(), is(0));
     }

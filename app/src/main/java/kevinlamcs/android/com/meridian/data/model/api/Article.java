@@ -9,14 +9,18 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
+import java.util.Objects;
 
-import kevinlamcs.android.com.meridian.util.AppConstants;
 import kevinlamcs.android.com.meridian.util.converter.MultimediaListTypeConverter;
 import kevinlamcs.android.com.meridian.util.converter.StringListTypeConverter;
 
-@Entity(tableName = AppConstants.ARTICLE_DATABASE_NAME, primaryKeys = {"title", "author"})
+import static kevinlamcs.android.com.meridian.data.model.api.Article.TABLE_NAME;
+
+@Entity(tableName = TABLE_NAME, primaryKeys = {"title", "author"})
 @TypeConverters({StringListTypeConverter.class, MultimediaListTypeConverter.class})
 public class Article {
+
+    public static final String TABLE_NAME = "articles";
 
     public Article() {
     }
@@ -107,6 +111,34 @@ public class Article {
     @SerializedName("multimedia")
     @ColumnInfo(name = "multimedia")
     private List<Multimedia> multimedia;
+
+    @Override
+    public boolean equals(Object obj) {
+
+        Article other = (Article) obj;
+
+        boolean titleSame = Objects.equals(this.title, other.getTitle());
+        boolean authorSame = Objects.equals(this.author, other.getAuthor());
+        boolean sectionSame = Objects.equals(this.section, other.getSection());
+        boolean subSectionSame = Objects.equals(this.subsection, other.getSubsection());
+        boolean descriptionSame = Objects.equals(this.description, other.getDescription());
+        boolean urlSame = Objects.equals(this.url, other.getUrl());
+        boolean itemTypeSame = Objects.equals(this.itemType, other.getItemType());
+        boolean updatedDateSame = Objects.equals(this.updatedDate, other.getUpdatedDate());
+        boolean createdDateSame = Objects.equals(this.createdDate, other.getCreatedDate());
+        boolean publishDateSame = Objects.equals(this.publishDate, other.getPublishDate());
+        boolean materialTypeFacetSame = Objects.equals(this.materialTypeFacet, other.getMaterialTypeFacet());
+        boolean kickerSame = Objects.equals(this.kicker, other.getKicker());
+        boolean descriptionFacetSame = Objects.equals(this.descriptionFacet, other.descriptionFacet);
+        boolean personFacetSame = Objects.equals(this.personFacet, other.getPersonFacet());
+        boolean geographyFacetSame = Objects.equals(this.geographyFacet, other.getGeographyFacet());
+        boolean multimediaSame = Objects.equals(this.multimedia, other.getMultimedia());
+
+        return (titleSame && authorSame && sectionSame && subSectionSame && descriptionSame &&
+                urlSame && itemTypeSame && updatedDateSame && createdDateSame && publishDateSame &&
+                materialTypeFacetSame && kickerSame && descriptionFacetSame && personFacetSame &&
+                geographyFacetSame && multimediaSame);
+    }
 
     @NonNull
     public String getTitle() {
@@ -244,5 +276,25 @@ public class Article {
 
     public void setMultimedia(List<Multimedia> multimedia) {
         this.multimedia = multimedia;
+    }
+
+    public String getStandardThumbnailUrl() {
+        return getPhotoUrl(Multimedia.Photo.STANDARD_THUMBNAIL);
+    }
+
+    public String getLargeThumbNailUrl() {
+        return getPhotoUrl(Multimedia.Photo.LARGE_THUMBNAIL);
+    }
+
+    public String getNormalPhotoUrl() {
+        return getPhotoUrl(Multimedia.Photo.NORMAL);
+    }
+
+    private String getPhotoUrl(int type) {
+        List<Multimedia> photoList = getMultimedia();
+        if (!photoList.isEmpty()) {
+            return photoList.get(type).getUrl();
+        }
+        return "";
     }
 }

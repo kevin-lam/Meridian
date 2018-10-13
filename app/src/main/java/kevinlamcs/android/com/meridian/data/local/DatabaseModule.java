@@ -8,8 +8,8 @@ import javax.inject.Singleton;
 import dagger.Module;
 import dagger.Provides;
 import kevinlamcs.android.com.meridian.data.local.dao.ArticleDao;
+import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.di.scope.ArticleDatabaseScope;
-import kevinlamcs.android.com.meridian.util.AppConstants;
 
 @Module
 public class DatabaseModule {
@@ -25,7 +25,7 @@ public class DatabaseModule {
     @Provides
     @ArticleDatabaseScope
     String provideArticleDatabaseName() {
-        return AppConstants.ARTICLE_DATABASE_NAME;
+        return Article.TABLE_NAME;
     }
 
     @Provides
@@ -34,4 +34,9 @@ public class DatabaseModule {
         return database.articleDao();
     }
 
+    @Provides
+    @Singleton
+    LocalArticleSource provideLocalArticleSource(RoomDatabaseArticleSource roomDatabaseArticleSource) {
+        return roomDatabaseArticleSource;
+    }
 }

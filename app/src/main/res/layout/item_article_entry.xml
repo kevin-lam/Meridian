@@ -7,43 +7,66 @@
     android:layout_height="wrap_content">
 
     <TextView
-        android:id="@+id/article_listing_title"
-        android:layout_width="wrap_content"
+        android:id="@+id/article_listing_section"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/article_listing_image"
+        android:layout_marginStart="@dimen/two_line_list_entry_margin_lr"
+        android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
+        android:layout_marginTop="@dimen/two_line_list_entry_margin_tb"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/article_listing_section_title_barrier"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="@tools:sample/cities" />
 
     <TextView
         android:id="@+id/article_listing_date"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintEnd_toStartOf="@+id/content_image_divider"
-        app:layout_constraintHorizontal_chainStyle="packed"
-        app:layout_constraintTop_toTopOf="@+id/article_listing_image"
+        android:layout_marginTop="@dimen/two_line_list_entry_margin_tb"
+        android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
+        android:textAlignment="viewEnd"
+        app:layout_constraintEnd_toStartOf="@+id/article_listing_date_image_barrier"
+        app:layout_constraintTop_toTopOf="parent"
         tools:text="17h" />
 
     <TextView
-        android:id="@+id/article_listing_description"
-        android:layout_width="wrap_content"
+        android:id="@+id/article_listing_title"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="@id/article_listing_title"
-        app:layout_constraintTop_toBottomOf="@id/article_listing_title"
-        tools:text="Description" />
+        android:layout_marginBottom="@dimen/two_line_list_entry_margin_tb"
+        android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
+        android:layout_marginTop="@dimen/two_line_list_entry_first_line_second_line_spacing"
+        app:layout_constraintStart_toStartOf="@id/article_listing_section"
+        app:layout_constraintEnd_toStartOf="@id/article_listing_section_title_barrier"
+        app:layout_constraintTop_toBottomOf="@id/article_listing_section"
+        app:layout_constraintBottom_toBottomOf="parent"
+        tools:text="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua." />
 
     <ImageView
         android:id="@+id/article_listing_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/two_line_list_entry_margin_lr"
+        android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/article_listing_date_image_barrier"
         app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/item_article_entry_image_placeholder"
         tools:src="@drawable/ic_launcher_background" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/content_image_divider"
+    <android.support.constraint.Barrier
+        android:id="@+id/article_listing_section_title_barrier"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="@dimen/list_entry_content_image_guideline_percent" />
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="article_listing_date"/>
+
+    <android.support.constraint.Barrier
+        android:id="@+id/article_listing_date_image_barrier"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:barrierDirection="start"
+        app:constraint_referenced_ids="article_listing_image"/>
+
 </android.support.constraint.ConstraintLayout>

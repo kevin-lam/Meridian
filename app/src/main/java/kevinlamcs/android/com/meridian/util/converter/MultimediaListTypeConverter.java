@@ -15,7 +15,7 @@ public class MultimediaListTypeConverter {
 
     @TypeConverter
     public static List<Multimedia> fromString(String value) {
-        Type listType = new TypeToken<ArrayList<String>>(){}.getType();
+        Type listType = new TypeToken<ArrayList<Multimedia>>(){}.getType();
         return new Gson().fromJson(value, listType);
     }
 

@@ -1,10 +1,95 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/article"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.article.ArticleFragment">
+
+    <HorizontalScrollView
+        android:id="@+id/article_description_scroll_container"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:paddingTop="4dp"
+        android:paddingBottom="8dp"
+        android:paddingStart="4dp"
+        android:paddingEnd="4dp"
+        android:visibility="gone"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+        <android.support.design.chip.ChipGroup
+            android:id="@+id/article_description_chip_group"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:singleLine="true">
+        </android.support.design.chip.ChipGroup>
+    </HorizontalScrollView>
+
+    <ImageView
+        android:id="@+id/article_image"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/article_description_scroll_container"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:src="@color/colorImagePlaceholder"
+        tools:layout_height="208dp"/>
+
+    <TextView
+        android:id="@+id/article_section"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_image"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/article_subsection"
+        tools:text="US"
+        tools:textColor="@color/gray900"/>
+
+    <TextView
+        android:id="@+id/article_subsection"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_image"
+        app:layout_constraintStart_toEndOf="@id/article_section"
+        tools:text="Poverty"
+        tools:textColor="@color/gray900"/>
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_section"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Pope Accepts Wuerl's Resignation as Washington Archbishop, but Calls Him a Model Bishop"
+        tools:textSize="20sp"
+        tools:textStyle="bold"
+        tools:textColor="@color/gray900"/>
+
+    <TextView
+        android:id="@+id/article_abstract"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_title"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="Despite demands to oust Cardinal Wuerl over sexual abuse scandals, Pope Francis praised him as a model leader."
+        tools:textColor="@color/gray600"/>
+
+    <TextView
+        android:id="@+id/article_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/article_abstract"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:text="by Jason Horowitz, Elizabeth Dias and Laurie Goodstein"
+        tools:textColor="@color/gray900"/>
+
+    <android.support.design.button.MaterialButton
+        android:id="@+id/article_full_content_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/article_read_more_button_label"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/article_author" />
 
 </android.support.constraint.ConstraintLayout>

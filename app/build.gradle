@@ -42,6 +42,7 @@ dependencies {
     implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
     implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
     implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
 
     // Architectural components
     implementation "android.arch.lifecycle:livedata:$rootProject.architecturalComponentsVersion"
@@ -58,12 +59,24 @@ dependencies {
     annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
     annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
 
+    // Utility
+    implementation "com.github.tbruyelle:rxpermissions:$rootProject.rxPermissionsVersion"
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:$rootProject.glideVersion") {
+        transitive = false
+    }
+    implementation "joda-time:joda-time:$rootProject.jodaVersion"
+
     // Networking
     implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
     implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
     implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
     implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
     implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
 
     // Logging
@@ -77,4 +90,5 @@ dependencies {
     androidTestImplementation "com.android.support.test:rules:$rootProject.junitRulesVersion"
     androidTestImplementation "com.android.support.test:runner:$rootProject.junitRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.expressoVersion"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$rootProject.uiAutomatorVersion"
 }

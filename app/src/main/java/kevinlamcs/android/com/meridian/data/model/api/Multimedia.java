@@ -8,7 +8,17 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.util.Objects;
+
 public final class Multimedia {
+
+    static final class Photo {
+        public static final int STANDARD_THUMBNAIL = 0;
+        public static final int LARGE_THUMBNAIL = 1;
+        public static final int NORMAL = 2;
+        public static final int MEDIUM = 3;
+        public static final int JUMBO = 4;
+    }
 
     public Multimedia() {
     }
@@ -44,6 +54,23 @@ public final class Multimedia {
     @Expose
     @SerializedName("copyright")
     private String copyright;
+
+    @Override
+    public boolean equals(Object obj) {
+
+        Multimedia other = (Multimedia) obj;
+
+        boolean urlSame = Objects.equals(this.url, other.getUrl());
+        boolean formatSame = Objects.equals(this.format, other.getFormat());
+        boolean heightSame = Objects.equals(this.height, other.getHeight());
+        boolean widthSame = Objects.equals(this.width, other.getWidth());
+        boolean typeSame = Objects.equals(this.type, other.getType());
+        boolean subTypeSame = Objects.equals(this.subtype, other.getSubtype());
+        boolean captionSame = Objects.equals(this.caption, other.getCaption());
+        boolean copyrightSame = Objects.equals(this.copyright, other.getCopyright());
+        return (urlSame && formatSame && heightSame && widthSame && typeSame && subTypeSame &&
+                captionSame && copyrightSame);
+    }
 
     public String getUrl() {
         return url;

@@ -4,4 +4,7 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
+    <string name="load_article_rationale">Please allow internet access for articles to be displayed.</string>
+    <string name="article_read_more_button_label">Read More</string>
+
 </resources>
