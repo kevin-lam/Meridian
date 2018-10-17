@@ -1,21 +1,16 @@
 package kevinlamcs.android.com.meridian.ui.article;
 
-import android.arch.lifecycle.ViewModelProvider;
-import android.arch.lifecycle.ViewModelProviders;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.recyclerview.extensions.ListAdapter;
 import android.support.v7.util.DiffUtil;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.RequestBuilder;
-import com.bumptech.glide.load.engine.DiskCacheStrategy;
 
 import java.lang.ref.WeakReference;
 import java.util.Collections;
@@ -25,29 +20,24 @@ import javax.inject.Inject;
 
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
-import kevinlamcs.android.com.meridian.data.model.api.Multimedia;
-import kevinlamcs.android.com.meridian.util.image.GlideApp;
-import kevinlamcs.android.com.meridian.util.image.GlideRequest;
-import kevinlamcs.android.com.meridian.util.image.GlideRequests;
 import kevinlamcs.android.com.meridian.util.image.ImageLoader;
-import kevinlamcs.android.com.meridian.util.log.ApplicationLogger;
 
 public class ArticleListingAdapter extends ListAdapter<Article, ArticleListingViewHolder> implements ListPreloader.PreloadModelProvider<Article> {
 
-    private final ArticleListingFragment fragment;
     private final ImageLoader imageLoader;
+    private final Fragment fragment;
 
     @Inject
-    public ArticleListingAdapter(ArticleListingFragment fragment, ImageLoader imageLoader) {
+    public ArticleListingAdapter(Fragment fragment) {
         super(diffCallback);
         this.fragment = fragment;
-        this.imageLoader = imageLoader;
+        this.imageLoader = new ImageLoader(new WeakReference<>(fragment.getContext()));
     }
 
     @Override
     public ArticleListingViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article_entry, parent, false);
-        return new ArticleListingViewHolder(view, fragment, imageLoader);
+        return new ArticleListingViewHolder(view, fragment);
     }
 
     @Override
@@ -81,11 +71,10 @@ public class ArticleListingAdapter extends ListAdapter<Article, ArticleListingVi
     @Nullable
     @Override
     public RequestBuilder<?> getPreloadRequestBuilder(@NonNull Article item) {
-        String standardThumbnailUrl = item.getStandardThumbnailUrl();
-        if (TextUtils.isEmpty(standardThumbnailUrl)) {
-            return null;
+        if (item.hasPhoto()) {
+            return imageLoader.load(item.getJumboPhotoUrl()).thumbnail(item.getLargeThumbnailUrl()).getGlideRequest();
         }
-        return imageLoader.load(standardThumbnailUrl).getGlideRequest();
+        return null;
     }
 
     public void setArticles(List<Article> articles) {

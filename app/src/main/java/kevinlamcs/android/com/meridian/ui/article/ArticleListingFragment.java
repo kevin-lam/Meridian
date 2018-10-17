@@ -63,16 +63,22 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     @Override
-    public void setUpPostViewCreated() {
+    public void setupOnViewCreated() {
+        super.setupOnViewCreated();
         articleRecyclerView.setLayoutManager(linearLayoutManager);
         articleRecyclerView.setAdapter(articleListingAdapter);
         articleRecyclerView.addOnScrollListener(preloader);
     }
 
     @Override
+    public void tearDownOnViewDestroyed() {
+        articleRecyclerView.setLayoutManager(null);
+    }
+
+    @Override
     public void subscribeToViewModelChanges() {
         articleListingViewModel.getArticles()
-            .observe(this, articles -> articleListingAdapter.setArticles(articles));
+            .observe(this, articleListingAdapter::setArticles);
     }
 
     @Override

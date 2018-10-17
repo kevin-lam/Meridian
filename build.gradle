@@ -75,8 +75,8 @@ ext {
     // Test dependencies
     junitVersion = '4.12'
     hamcrestVersion = '1.3'
-    junitRunnerVersion = '1.0.1'
-    junitRulesVersion = '1.0.1'
-    expressoVersion = '3.0.1'
+    junitRunnerVersion = '1.0.2'
+    junitRulesVersion = '1.0.2'
+    expressoVersion = '3.0.2'
     uiAutomatorVersion = '2.1.3'
 }

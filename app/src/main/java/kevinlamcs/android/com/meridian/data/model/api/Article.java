@@ -4,10 +4,12 @@ import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.TypeConverters;
 import android.support.annotation.NonNull;
+import android.text.TextUtils;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
@@ -18,7 +20,7 @@ import static kevinlamcs.android.com.meridian.data.model.api.Article.TABLE_NAME;
 
 @Entity(tableName = TABLE_NAME, primaryKeys = {"title", "author"})
 @TypeConverters({StringListTypeConverter.class, MultimediaListTypeConverter.class})
-public class Article {
+public class Article implements Serializable {
 
     public static final String TABLE_NAME = "articles";
 
@@ -42,7 +44,7 @@ public class Article {
     private String subsection;
 
     @Expose
-    @SerializedName("results")
+    @SerializedName("abstract")
     @ColumnInfo(name = "description")
     private String description;
 
@@ -246,6 +248,10 @@ public class Article {
         this.descriptionFacet = descriptionFacet;
     }
 
+    public boolean hasDescriptionTags() {
+        return !getDescriptionFacet().isEmpty();
+    }
+
     public List<String> getOrganizationFacet() {
         return organizationFacet;
     }
@@ -278,16 +284,44 @@ public class Article {
         this.multimedia = multimedia;
     }
 
+    public boolean hasStandardThumbnailUrl() {
+        return !TextUtils.isEmpty(getStandardThumbnailUrl());
+    }
+
+    public boolean hasLargeThumbnailUrl() {
+        return !TextUtils.isEmpty(getLargeThumbnailUrl());
+    }
+
+    public boolean hasMediumPhotoUrl() {
+        return !TextUtils.isEmpty(getMediumPhotoUrl());
+    }
+
+    public boolean hasJumboPhotoUrl() {
+        return !TextUtils.isEmpty(getJumboPhotoUrl());
+    }
+
+    public boolean hasPhoto() {
+        return hasLargeThumbnailUrl() && hasJumboPhotoUrl();
+    }
+
     public String getStandardThumbnailUrl() {
         return getPhotoUrl(Multimedia.Photo.STANDARD_THUMBNAIL);
     }
 
-    public String getLargeThumbNailUrl() {
+    public String getLargeThumbnailUrl() {
         return getPhotoUrl(Multimedia.Photo.LARGE_THUMBNAIL);
     }
 
     public String getNormalPhotoUrl() {
         return getPhotoUrl(Multimedia.Photo.NORMAL);
+    }
+
+    public String getMediumPhotoUrl() {
+        return getPhotoUrl(Multimedia.Photo.MEDIUM);
+    }
+
+    public String getJumboPhotoUrl() {
+        return getPhotoUrl(Multimedia.Photo.JUMBO);
     }
 
     private String getPhotoUrl(int type) {

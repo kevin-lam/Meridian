@@ -27,9 +27,23 @@ public class ImageLoader {
             glideRequest = GlideApp.with(context)
                     .asDrawable()
                     .dontAnimate()
-                    .override(AppConstants.THUMBNAIL_SIZE, AppConstants.THUMBNAIL_SIZE)
-                    .diskCacheStrategy(DiskCacheStrategy.RESOURCE)
+                    .centerCrop()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .load(url);
+        }
+        return this;
+    }
+
+    public ImageLoader thumbnail(String url) {
+        Context context = contextReference.get();
+        if (context != null) {
+            glideRequest = glideRequest.thumbnail(
+                    GlideApp.with(context)
+                    .asDrawable()
+                    .dontAnimate()
+                    .centerCrop()
+                    .load(url)
+            );
         }
         return this;
     }

@@ -1,95 +1,141 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/article"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/article_scroll_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".ui.article.ArticleFragment">
+    android:layout_height="wrap_content">
 
-    <HorizontalScrollView
-        android:id="@+id/article_description_scroll_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:paddingTop="4dp"
-        android:paddingBottom="8dp"
-        android:paddingStart="4dp"
-        android:paddingEnd="4dp"
-        android:visibility="gone"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
-        <android.support.design.chip.ChipGroup
-            android:id="@+id/article_description_chip_group"
+    <android.support.constraint.ConstraintLayout
+        android:id="@+id/article"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.article.ArticleFragment">
+
+        <HorizontalScrollView
+            android:id="@+id/article_description_scroll_container"
+            style="@style/HorizontalChipScroller"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            app:singleLine="true">
-        </android.support.design.chip.ChipGroup>
-    </HorizontalScrollView>
+            android:scrollbars="none"
+            android:visibility="gone"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-    <ImageView
-        android:id="@+id/article_image"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@id/article_description_scroll_container"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        tools:src="@color/colorImagePlaceholder"
-        tools:layout_height="208dp"/>
+            <android.support.design.chip.ChipGroup
+                android:id="@+id/article_description_chip_group"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:singleLine="true"></android.support.design.chip.ChipGroup>
+        </HorizontalScrollView>
 
-    <TextView
-        android:id="@+id/article_section"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/article_image"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/article_subsection"
-        tools:text="US"
-        tools:textColor="@color/gray900"/>
+        <ImageView
+            android:id="@+id/article_image"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="16dp"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.4"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_description_scroll_container"
+            tools:layout_height="208dp"
+            tools:src="@color/colorImagePlaceholder" />
 
-    <TextView
-        android:id="@+id/article_subsection"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/article_image"
-        app:layout_constraintStart_toEndOf="@id/article_section"
-        tools:text="Poverty"
-        tools:textColor="@color/gray900"/>
+        <TextView
+            android:id="@+id/article_section"
+            style="@style/DetailOverline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            android:inputType="textNoSuggestions|textMultiLine"
+            app:layout_constraintEnd_toStartOf="@id/article_subsection"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_image"
+            tools:text="US"
+            tools:textColor="@color/gray900" />
 
-    <TextView
-        android:id="@+id/article_title"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/article_section"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Pope Accepts Wuerl's Resignation as Washington Archbishop, but Calls Him a Model Bishop"
-        tools:textSize="20sp"
-        tools:textStyle="bold"
-        tools:textColor="@color/gray900"/>
+        <TextView
+            android:id="@+id/article_subsection"
+            style="@style/DetailOverline"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            android:inputType="textNoSuggestions|textMultiLine"
+            app:layout_constraintStart_toEndOf="@id/article_section"
+            app:layout_constraintTop_toBottomOf="@id/article_image"
+            tools:text="Poverty"
+            tools:textColor="@color/gray900" />
 
-    <TextView
-        android:id="@+id/article_abstract"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/article_title"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="Despite demands to oust Cardinal Wuerl over sexual abuse scandals, Pope Francis praised him as a model leader."
-        tools:textColor="@color/gray600"/>
+        <TextView
+            android:id="@+id/article_title"
+            style="@style/DetailH6Headline"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_general_margin_tb"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="8dp"
+            android:inputType="textNoSuggestions|textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_section"
+            tools:text="Pope Accepts Wuerl's Resignation as Washington Archbishop, but Calls Him a Model Bishop"
+            tools:textColor="@color/gray900"
+            tools:textSize="20sp"
+            tools:textStyle="bold" />
 
-    <TextView
-        android:id="@+id/article_author"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/article_abstract"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:text="by Jason Horowitz, Elizabeth Dias and Laurie Goodstein"
-        tools:textColor="@color/gray900"/>
+        <TextView
+            android:id="@+id/article_abstract"
+            style="@style/DetailBody2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_general_margin_tb"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            android:inputType="textNoSuggestions|textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_title"
+            tools:text="Despite demands to oust Cardinal Wuerl over sexual abuse scandals, Pope Francis praised him as a model leader."
+            tools:textColor="@color/gray600" />
 
-    <android.support.design.button.MaterialButton
-        android:id="@+id/article_full_content_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/article_read_more_button_label"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/article_author" />
+        <TextView
+            android:id="@+id/article_author"
+            style="@style/DetailBody1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_general_margin_tb"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/detail_general_margin_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            android:inputType="textNoSuggestions|textMultiLine"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_abstract"
+            tools:text="by Jason Horowitz, Elizabeth Dias and Laurie Goodstein"
+            tools:textColor="@color/gray900" />
 
-</android.support.constraint.ConstraintLayout>
+        <android.support.design.button.MaterialButton
+            android:id="@+id/article_full_content_button"
+            style="@style/OutlinedButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/detail_general_margin_tb"
+            android:layout_marginEnd="@dimen/detail_general_margin_lr"
+            android:layout_marginStart="@dimen/outlined_button_padding_lr"
+            android:layout_marginTop="@dimen/detail_general_margin_tb"
+            android:text="@string/article_read_more_button_label"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/article_author" />
+
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

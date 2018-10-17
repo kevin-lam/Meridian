@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="font_h1">96sp</dimen>
+    <dimen name="font_h2">60sp</dimen>
+    <dimen name="font_h3">48sp</dimen>
+    <dimen name="font_h4">34sp</dimen>
+    <dimen name="font_h5">24sp</dimen>
+    <dimen name="font_h6">20sp</dimen>
+    <dimen name="font_subtitle1">16sp</dimen>
+    <dimen name="font_subtitle2">14sp</dimen>
+    <dimen name="font_body1">16sp</dimen>
+    <dimen name="font_body2">14sp</dimen>
+    <dimen name="font_button">14sp</dimen>
+    <dimen name="font_caption">12sp</dimen>
+    <dimen name="font_overline">10sp</dimen>
+</resources>

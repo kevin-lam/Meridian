@@ -6,6 +6,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     app:closeIconEnabled="false"
+    android:clickable="false"
     style="@style/RectangleChip"
     tools:text="#Australia">
 

@@ -1,9 +1,11 @@
 package kevinlamcs.android.com.meridian.ui.base;
 
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,14 +21,17 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     public abstract int getLayoutId();
     public abstract V getViewModel();
     public abstract void subscribeToViewModelChanges();
-    public abstract void setUpPostViewCreated();
-
 
     private V viewModel;
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
+    public void onAttach(Context context) {
         injectDependencies();
+        super.onAttach(context);
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         viewModel = getViewModel();
     }
@@ -43,8 +48,33 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subscribeToViewModelChanges();
-        setUpPostViewCreated();
+        setupOnViewCreated();
+    }
 
+    public void setupOnViewCreated() {
+    }
+
+    public void tearDownOnViewDestroyed() {
+
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        tearDownOnViewDestroyed();
+    }
+
+    @Override
+    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+        super.onActivityCreated(savedInstanceState);
+        onRestoreInstanceState(savedInstanceState);
+        setupOnRestoreInstanceState();
+    }
+
+    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
+    }
+
+    public void setupOnRestoreInstanceState() {
     }
 
     public void requestPermission(String rationale, PermissionListener permissionListener, String... requestedPermission) {
@@ -62,6 +92,19 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
 
     protected boolean firstTimeCreated(Bundle savedInstanceState) {
         return savedInstanceState == null;
+    }
+
+    public void onBackPressed() {
+        if (!isDetached()) {
+            getActivity().getSupportFragmentManager().popBackStack();
+        }
+    }
+
+    public void showBackButton(boolean show) {
+        if (!isDetached()) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(show);
+            setHasOptionsMenu(true);
+        }
     }
 
     private void injectDependencies() {

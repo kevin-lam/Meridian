@@ -8,9 +8,10 @@ import android.support.annotation.NonNull;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-public final class Multimedia {
+public final class Multimedia implements Serializable{
 
     static final class Photo {
         public static final int STANDARD_THUMBNAIL = 0;

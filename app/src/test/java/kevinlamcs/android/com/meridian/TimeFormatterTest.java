@@ -1,7 +1,6 @@
 package kevinlamcs.android.com.meridian;
 
-import android.test.suitebuilder.annotation.SmallTest;
-import android.util.Log;
+import android.support.test.filters.SmallTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

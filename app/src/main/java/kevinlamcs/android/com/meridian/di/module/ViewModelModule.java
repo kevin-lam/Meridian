@@ -8,6 +8,7 @@ import dagger.Module;
 import dagger.multibindings.IntoMap;
 import kevinlamcs.android.com.meridian.di.scope.ViewModelScope;
 import kevinlamcs.android.com.meridian.ui.article.ArticleListingViewModel;
+import kevinlamcs.android.com.meridian.ui.article.ArticleViewModel;
 import kevinlamcs.android.com.meridian.viewmodel.ViewModelFactory;
 
 @Module
@@ -17,6 +18,11 @@ public abstract class ViewModelModule {
     @IntoMap
     @ViewModelScope(ArticleListingViewModel.class)
     abstract ViewModel bindArticleListingViewModel(ArticleListingViewModel articleListingViewModel);
+
+    @Binds
+    @IntoMap
+    @ViewModelScope(ArticleViewModel.class)
+    abstract ViewModel bindArticleViewModel(ArticleViewModel articleViewModel);
 
     @Binds
     abstract ViewModelProvider.Factory bindViewModelFactory(ViewModelFactory factory);

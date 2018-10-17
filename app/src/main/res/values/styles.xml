@@ -2,21 +2,10 @@
 
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Base.Theme.MaterialComponents.Light">
-        <!-- Customize your theme here. -->
+        <!-- Original -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:colorBackground">@color/colorBackground</item>
     </style>
-
-    <style name="RectangleChip" parent="Base.Widget.MaterialComponents.Chip">
-        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
-        <item name="chipStrokeColor">@color/text12</item>
-        <item name="chipStrokeWidth">@dimen/chip_border_width</item>
-        <item name="chipBackgroundColor">@android:color/transparent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:paddingStart">@dimen/chip_padding_lr</item>
-        <item name="android:paddingEnd">@dimen/chip_padding_lr</item>
-        <item name="android:textColor">@color/text87</item>
-    </style>
-
 </resources>

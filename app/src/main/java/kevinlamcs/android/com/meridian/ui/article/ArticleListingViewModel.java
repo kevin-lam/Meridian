@@ -11,6 +11,7 @@ import io.reactivex.schedulers.Schedulers;
 import kevinlamcs.android.com.meridian.data.ArticleRepository;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseViewModel;
+import kevinlamcs.android.com.meridian.util.image.ImageLoader;
 import kevinlamcs.android.com.meridian.util.listener.PermissionListener;
 import kevinlamcs.android.com.meridian.util.log.ApplicationLogger;
 

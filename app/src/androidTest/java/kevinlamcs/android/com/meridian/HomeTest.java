@@ -14,13 +14,12 @@ import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import kevinlamcs.android.com.meridian.ui.article.ArticleListingFragment;
 import kevinlamcs.android.com.meridian.ui.main.MainActivity;
 
-import static android.support.test.espresso.Espresso.onData;
 import static android.support.test.espresso.Espresso.onView;
 import static android.support.test.espresso.action.ViewActions.click;
 import static android.support.test.espresso.assertion.ViewAssertions.matches;
+import static android.support.test.espresso.contrib.RecyclerViewActions.actionOnItemAtPosition;
 import static android.support.test.espresso.matcher.ViewMatchers.assertThat;
 import static android.support.test.espresso.matcher.ViewMatchers.isDisplayed;
 import static android.support.test.espresso.matcher.ViewMatchers.withId;
@@ -28,29 +27,18 @@ import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
-@LargeTest
 @RunWith(AndroidJUnit4.class)
+@LargeTest
 public class HomeTest {
 
     @Rule
     public ActivityTestRule<MainActivity> mainActivityTestRule = new ActivityTestRule<>(MainActivity.class, true, true);
 
     UiDevice device;
-    ArticleListingFragment fragment;
 
     @Before
     public void setup() {
-        startArticleListingFragment();
         startUiAutomator();
-    }
-
-    private void startArticleListingFragment() {
-        fragment = ArticleListingFragment.newInstance();
-        mainActivityTestRule.getActivity()
-                .getSupportFragmentManager()
-                .beginTransaction()
-                .add(R.id.main_content_container, fragment)
-                .commit();
     }
 
     private void startUiAutomator() {
@@ -58,9 +46,9 @@ public class HomeTest {
     }
 
     @Test
-    public void articleListingNotEmptyOnStart() throws InterruptedException {
-        UiObject articleEntry = device.findObject(new UiSelector().resourceId("R.id.article"));
-        articleEntry.waitForExists(3000);
+    public void articleListingNotEmptyOnStart() {
+        UiObject articleEntry = device.findObject(new UiSelector().resourceId("R.id.article_entry"));
+        articleEntry.waitForExists(100);
 
         RecyclerView recyclerView = mainActivityTestRule.getActivity().findViewById(R.id.articles);
         assertThat(recyclerView.getAdapter().getItemCount(), is(not(equalTo(0))));
@@ -68,10 +56,10 @@ public class HomeTest {
 
     @Test
     public void clickArticleEntryDisplaysArticle() {
-        onData(withId(R.id.articles))
-                .atPosition(0)
-                .perform(click());
-        onView(withId(R.id.article))
-                .check(matches(isDisplayed()));
+        UiObject articleEntry = device.findObject(new UiSelector().resourceId("R.id.article_entry"));
+        articleEntry.waitForExists(100);
+
+        onView(withId(R.id.articles)).perform(actionOnItemAtPosition(0, click()));
+        onView(withId(R.id.article)).check(matches(isDisplayed()));
     }
 }

@@ -11,6 +11,8 @@ import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import javax.inject.Named;
+
 import dagger.Module;
 import dagger.Provides;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
@@ -19,28 +21,23 @@ import kevinlamcs.android.com.meridian.util.image.GlideApp;
 import kevinlamcs.android.com.meridian.util.image.ImageLoader;
 import kevinlamcs.android.com.meridian.util.image.ImageModule;
 
-@Module(includes = {ImageModule.class})
+@Module
 public class ArticleListingModule {
 
     @Provides
-    ArticleListingAdapter provideArticleListingAdapter(ArticleListingFragment fragment, ImageLoader imageLoader) {
-        ArticleListingAdapter adapter = new ArticleListingAdapter(fragment, imageLoader);
+    ArticleListingAdapter provideArticleListingAdapter(ArticleListingFragment fragment) {
+        ArticleListingAdapter adapter = new ArticleListingAdapter(fragment);
         adapter.submitList(new ArrayList<>());
         return adapter;
     }
 
     @Provides
-    LinearLayoutManager provideLinearLayoutManager(Context context) {
-        return new LinearLayoutManager(context);
+    LinearLayoutManager provideLinearLayoutManager(ArticleListingFragment fragment) {
+        return new LinearLayoutManager(fragment.getContext());
     }
 
     @Provides
     RecyclerViewPreloader<Article> provideRecyclerViewPreloader(ArticleListingAdapter adapter, ArticleListingFragment fragment, PreloadSizeProvider sizeProvider) {
         return new RecyclerViewPreloader<Article>(Glide.with(fragment), adapter, sizeProvider, AppConstants.PRELOAD_AHEAD_ITEM_COUNT);
-    }
-
-    @Provides
-    ImageLoader provideImageLoader(ArticleListingFragment fragment) {
-        return new ImageLoader(new WeakReference<>(fragment.getContext()));
     }
 }
