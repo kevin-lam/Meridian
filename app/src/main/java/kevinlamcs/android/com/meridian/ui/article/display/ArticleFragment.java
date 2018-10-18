@@ -1,12 +1,12 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.display;
 
 
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.button.MaterialButton;
 import android.support.design.chip.ChipGroup;
-import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -15,11 +15,16 @@ import android.widget.TextView;
 
 import java.lang.ref.WeakReference;
 
+import javax.inject.Inject;
+
 import butterknife.BindView;
+import butterknife.OnClick;
+import dagger.Provides;
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseFragment;
 import kevinlamcs.android.com.meridian.ui.base.BaseViewModel;
+import kevinlamcs.android.com.meridian.ui.browser.BrowserClient;
 import kevinlamcs.android.com.meridian.util.image.ImageLoader;
 
 public class ArticleFragment extends BaseFragment {
@@ -47,6 +52,9 @@ public class ArticleFragment extends BaseFragment {
 
     @BindView(R.id.article_author)
     TextView author;
+
+    @Inject
+    BrowserClient client;
 
     private static final String ARG_ARTICLE = "ARTICLE";
     private ArticleViewModel articleViewModel;
@@ -114,5 +122,10 @@ public class ArticleFragment extends BaseFragment {
                 onBackPressed();
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @OnClick(R.id.article_full_content_button)
+    public void click() {
+        articleViewModel.displayFullArticle(client);
     }
 }

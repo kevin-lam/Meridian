@@ -1,4 +1,4 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.item;
 
 import android.support.v4.app.Fragment;
 import android.view.View;

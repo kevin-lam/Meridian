@@ -1,4 +1,4 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.listing;
 
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,6 +20,7 @@ import javax.inject.Inject;
 
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
+import kevinlamcs.android.com.meridian.ui.article.item.ArticleListingViewHolder;
 import kevinlamcs.android.com.meridian.util.image.ImageLoader;
 
 public class ArticleListingAdapter extends ListAdapter<Article, ArticleListingViewHolder> implements ListPreloader.PreloadModelProvider<Article> {

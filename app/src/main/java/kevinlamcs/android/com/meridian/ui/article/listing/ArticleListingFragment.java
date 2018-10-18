@@ -1,4 +1,4 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.listing;
 
 import android.Manifest;
 import android.arch.lifecycle.ViewModelProvider;
@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 
