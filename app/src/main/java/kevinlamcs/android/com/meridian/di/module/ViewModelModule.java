@@ -7,8 +7,8 @@ import dagger.Binds;
 import dagger.Module;
 import dagger.multibindings.IntoMap;
 import kevinlamcs.android.com.meridian.di.scope.ViewModelScope;
-import kevinlamcs.android.com.meridian.ui.article.ArticleListingViewModel;
-import kevinlamcs.android.com.meridian.ui.article.ArticleViewModel;
+import kevinlamcs.android.com.meridian.ui.article.listing.ArticleListingViewModel;
+import kevinlamcs.android.com.meridian.ui.article.display.ArticleViewModel;
 import kevinlamcs.android.com.meridian.viewmodel.ViewModelFactory;
 
 @Module

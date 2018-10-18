@@ -10,7 +10,7 @@
         android:id="@+id/article"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.article.ArticleFragment">
+        tools:context=".ui.article.display.ArticleFragment">
 
         <HorizontalScrollView
             android:id="@+id/article_description_scroll_container"

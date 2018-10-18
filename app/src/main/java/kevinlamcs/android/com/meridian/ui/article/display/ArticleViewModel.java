@@ -1,13 +1,10 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.display;
 
 import android.arch.lifecycle.MutableLiveData;
 import android.content.Context;
 import android.support.design.chip.Chip;
 import android.support.design.chip.ChipGroup;
-import android.support.design.internal.FlexboxLayout;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
-import android.widget.ImageView;
 
 import java.util.List;
 
@@ -16,6 +13,7 @@ import javax.inject.Inject;
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseViewModel;
+import kevinlamcs.android.com.meridian.ui.browser.BrowserClient;
 import kevinlamcs.android.com.meridian.util.TextUtil;
 
 public class ArticleViewModel extends BaseViewModel {
@@ -47,5 +45,9 @@ public class ArticleViewModel extends BaseViewModel {
             tag.setChipText('#' + TextUtil.removePunctuation(description));
             descriptionTags.addView(tag);
         }
+    }
+
+    public void displayFullArticle(BrowserClient client) {
+        client.load(article.getValue().getUrl());
     }
 }

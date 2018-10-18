@@ -1,25 +1,19 @@
-package kevinlamcs.android.com.meridian.ui.article;
+package kevinlamcs.android.com.meridian.ui.article.listing;
 
-import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.ListPreloader;
 import com.bumptech.glide.ListPreloader.PreloadSizeProvider;
 import com.bumptech.glide.integration.recyclerview.RecyclerViewPreloader;
 
-import java.lang.ref.WeakReference;
 import java.util.ArrayList;
-
-import javax.inject.Named;
 
 import dagger.Module;
 import dagger.Provides;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
+import kevinlamcs.android.com.meridian.ui.article.listing.ArticleListingAdapter;
+import kevinlamcs.android.com.meridian.ui.article.listing.ArticleListingFragment;
 import kevinlamcs.android.com.meridian.util.AppConstants;
-import kevinlamcs.android.com.meridian.util.image.GlideApp;
-import kevinlamcs.android.com.meridian.util.image.ImageLoader;
-import kevinlamcs.android.com.meridian.util.image.ImageModule;
 
 @Module
 public class ArticleListingModule {

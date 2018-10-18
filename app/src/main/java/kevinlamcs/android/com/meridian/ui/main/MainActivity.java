@@ -10,7 +10,7 @@ import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.ui.base.BaseActivity;
-import kevinlamcs.android.com.meridian.ui.article.ArticleListingFragment;
+import kevinlamcs.android.com.meridian.ui.article.listing.ArticleListingFragment;
 
 public class MainActivity extends BaseActivity implements HasSupportFragmentInjector {
 
