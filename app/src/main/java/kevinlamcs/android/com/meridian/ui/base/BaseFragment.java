@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -48,33 +49,6 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         subscribeToViewModelChanges();
-        setupOnViewCreated();
-    }
-
-    public void setupOnViewCreated() {
-    }
-
-    public void tearDownOnViewDestroyed() {
-
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
-        tearDownOnViewDestroyed();
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-        onRestoreInstanceState(savedInstanceState);
-        setupOnRestoreInstanceState();
-    }
-
-    public void onRestoreInstanceState(@Nullable Bundle savedInstanceState) {
-    }
-
-    public void setupOnRestoreInstanceState() {
     }
 
     public void requestPermission(String rationale, PermissionListener permissionListener, String... requestedPermission) {
@@ -95,15 +69,20 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     }
 
     public void onBackPressed() {
-        if (!isDetached()) {
+        if (isAdded()) {
             getActivity().getSupportFragmentManager().popBackStack();
         }
     }
 
     public void showBackButton(boolean show) {
-        if (!isDetached()) {
+        if (isAdded()) {
             ((AppCompatActivity)getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(show);
-            setHasOptionsMenu(true);
+        }
+    }
+
+    public void setSupportActionBar(Toolbar toolbar) {
+        if (isAdded()) {
+            ((AppCompatActivity)getActivity()).setSupportActionBar(toolbar);
         }
     }
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<inset xmlns:android="http://schemas.android.com/apk/res/android"
+    android:insetLeft="@dimen/two_line_list_entry_margin_lr"
+    android:insetRight="@dimen/two_line_list_entry_margin_lr">
+    <shape android:shape="rectangle">
+        <stroke
+            android:width="@dimen/decorator_entry_width"
+            android:color="@color/gray400"
+            android:dashGap="@dimen/decorator_entry_dash_gap"
+            android:dashWidth="@dimen/decorator_entry_dash_width" />
+        <size android:height="@dimen/decorator_entry_height" />
+    </shape>
+</inset>

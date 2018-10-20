@@ -21,4 +21,10 @@
     <!-- Details -->
     <dimen name="detail_general_margin_lr">16dp</dimen>
     <dimen name="detail_general_margin_tb">16dp</dimen>
+
+    <!-- Decorator -->
+    <dimen name="decorator_entry_width">1dp</dimen>
+    <dimen name="decorator_entry_dash_width">1dp</dimen>
+    <dimen name="decorator_entry_dash_gap">3dp</dimen>
+    <dimen name="decorator_entry_height">1.5dp</dimen>
 </resources>

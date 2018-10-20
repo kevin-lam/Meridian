@@ -1,5 +1,7 @@
 package kevinlamcs.android.com.meridian.util;
 
+import android.content.Intent;
+
 public class AppConstants {
 
     // API
@@ -9,11 +11,13 @@ public class AppConstants {
 
     // Image
     public static final int PRELOAD_AHEAD_ITEM_COUNT = 5;
-    public static final int THUMBNAIL_SIZE = 192;
 
     // Time
     public static final String TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ssXXX";
     public static final String DATE_FORMAT = "%d/%d";
     public static final String HOUR_FORMAT = "%dH";
     public static final String MINUTE_FORMAT = "%dM";
+
+    // Service
+    public static final String CUSTOM_TAB_SERVICE = "android.support.customtabs.action.CustomTabsService";
 }

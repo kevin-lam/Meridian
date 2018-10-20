@@ -2,9 +2,11 @@ package kevinlamcs.android.com.meridian.ui.main;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.Toolbar;
 
 import javax.inject.Inject;
 
+import butterknife.BindView;
 import dagger.android.AndroidInjector;
 import dagger.android.DispatchingAndroidInjector;
 import dagger.android.support.HasSupportFragmentInjector;
