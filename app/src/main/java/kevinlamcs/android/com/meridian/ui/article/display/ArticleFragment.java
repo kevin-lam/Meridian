@@ -7,6 +7,9 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.button.MaterialButton;
 import android.support.design.chip.ChipGroup;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.HorizontalScrollView;
@@ -53,6 +56,9 @@ public class ArticleFragment extends BaseFragment {
     @BindView(R.id.article_author)
     TextView author;
 
+    @BindView(R.id.toolbar)
+    Toolbar toolbar;
+
     @Inject
     BrowserClient client;
 
@@ -75,13 +81,19 @@ public class ArticleFragment extends BaseFragment {
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        showBackButton(true);
         this.imageLoader = new ImageLoader(new WeakReference<>(this.getContext()));
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        setSupportActionBar(toolbar);
+        setHasOptionsMenu(true);
+        showBackButton(true);
+        loadArticle();
+    }
+
+    private void loadArticle() {
         Article article = (Article) this.getArguments().getSerializable(ARG_ARTICLE);
         articleViewModel.setArticle(article);
     }
@@ -110,7 +122,7 @@ public class ArticleFragment extends BaseFragment {
                 descriptionScroller.setVisibility(View.VISIBLE);
             }
             if (article.hasPhoto()) {
-                imageLoader.load(article.getJumboPhotoUrl()).thumbnail(article.getLargeThumbnailUrl()).into(image);
+                imageLoader.load(article.getJumboPhotoUrl()).into(image);
             }
         });
     }
