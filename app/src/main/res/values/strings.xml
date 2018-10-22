@@ -2,7 +2,9 @@
     <string name="app_name">Meridian</string>
 
     <!-- Snackbar -->
-    <string name="snackbar_load_article_rationale">Please allow internet access for articles to be displayed.</string>
+    <string name="snackbar_no_connection_rationale">No internet connection</string>
+    <string name="snackbar_load_error_rationale">Can not get articles</string>
+    <string name="retry">Retry</string>
 
     <!-- Button -->
     <string name="button_label_article_read_more">Read More</string>
@@ -29,5 +31,6 @@
     <!-- ImageView -->
     <string name="image_article">Article image</string>
     <string name="image_article_listing">Article listing image</string>
+
 
 </resources>

@@ -1,11 +1,12 @@
 package kevinlamcs.android.com.meridian.ui.article.listing;
 
-import android.Manifest;
 import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
@@ -39,20 +40,23 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     @BindView(R.id.articles)
     RecyclerView articleRecyclerView;
 
-    @BindView(R.id.articles_swipe_to_refresh)
+    @BindView(R.id.swipe_to_refresh_articles)
     SwipeRefreshLayout articleSwipeToRefresh;
 
     @BindView(R.id.toolbar)
-    Toolbar toolbar;
+    Toolbar articlesToolbar;
 
-    @BindView(R.id.drawer_article_topics)
-    DrawerLayout articleTopicDrawerLayout;
+    @BindView(R.id.drawer_article_sections)
+    DrawerLayout articleSectionsDrawerLayout;
 
     @BindView(R.id.navigation_view_article_sections)
-    NavigationView articleTopicNavigationView;
+    NavigationView articleSectionsNavigationView;
 
-    @BindString(R.string.snackbar_load_article_rationale)
-    String loadArticleRationale;
+    @BindView(R.id.coordinator_layout_articles)
+    CoordinatorLayout articlesCoordinatorLayout;
+
+    @BindString(R.string.snackbar_no_connection_rationale)
+    String noConnectionRationale;
 
     @Inject
     LinearLayoutManager linearLayoutManager;
@@ -107,10 +111,10 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
         switch (item.getItemId()) {
             case R.id.menu_articles_refresh:
                 articleListingViewModel.startRefresh();
-                loadArticlesBySectionWithPermission();
+                loadArticles();
                 return true;
             case android.R.id.home:
-                articleTopicDrawerLayout.openDrawer(GravityCompat.START);
+                articleSectionsDrawerLayout.openDrawer(GravityCompat.START);
                 return true;
 
         }
@@ -121,7 +125,7 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
-        setSupportActionBar(toolbar);
+        setSupportActionBar(articlesToolbar);
         setupDrawer();
         setupRecyclerView();
         setupSwipeRefreshLayout();
@@ -129,11 +133,11 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
 
     private void setupDrawer() {
         if (isAdded()) {
-            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+            ActionBar actionBar = ((AppCompatActivity) getActivity()).getSupportActionBar();
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
-            articleTopicNavigationView.getMenu().getItem(0).setChecked(true);
-            articleTopicNavigationView.setNavigationItemSelectedListener(menuItem -> {
+            articleSectionsNavigationView.getMenu().getItem(0).setChecked(true);
+            articleSectionsNavigationView.setNavigationItemSelectedListener(menuItem -> {
                 onNavigationItemSelected(menuItem);
                 return true;
             });
@@ -144,9 +148,9 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
         articleListingViewModel.startRefresh();
         articleListingViewModel.sectionSelected(new ArticleSection(navigationItem.getItemId(), navigationItem.getTitle().toString())
                 .toString());
-        loadArticlesBySectionWithPermission();
+        loadArticles();
         navigationItem.setCheckable(true);
-        articleTopicDrawerLayout.closeDrawers();
+        articleSectionsDrawerLayout.closeDrawers();
     }
 
     private void setupRecyclerView() {
@@ -159,7 +163,7 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     private void setupSwipeRefreshLayout() {
-        articleSwipeToRefresh.setOnRefreshListener(this::loadArticlesBySectionWithPermission);
+        articleSwipeToRefresh.setOnRefreshListener(this::loadArticles);
     }
 
     @Override
@@ -170,7 +174,7 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     private void tearDownDrawer() {
-        articleTopicNavigationView.setNavigationItemSelectedListener(null);
+        articleSectionsNavigationView.setNavigationItemSelectedListener(null);
     }
 
     private void tearDownRecyclerView() {
@@ -180,9 +184,16 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     @Override
     public void subscribeToViewModelChanges() {
         articleListingViewModel.getArticles()
-            .observe(this, articleListingAdapter::setArticles);
+                .observe(this, articleListingAdapter::setArticles);
         articleListingViewModel.getRefresh().observe(this, articleSwipeToRefresh::setRefreshing);
-        articleListingViewModel.getSection().observe(this, section -> loadArticlesBySectionWithPermission());
+        articleListingViewModel.getSection().observe(this, section -> loadArticles());
+        articleListingViewModel.getLoadError().observe(this, hasError -> showLoadError());
+    }
+
+    private void showLoadError() {
+        Snackbar.make(articlesCoordinatorLayout, R.string.snackbar_load_error_rationale, Snackbar.LENGTH_LONG)
+                .setAction(R.string.retry, view -> loadArticles())
+                .show();
     }
 
     @Override
@@ -190,9 +201,15 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
         articleListingViewModel.getArticles().removeObservers(this);
         articleListingViewModel.getRefresh().removeObservers(this);
         articleListingViewModel.getSection().removeObservers(this);
+        articleListingViewModel.getLoadError().removeObservers(this);
     }
 
-    private void loadArticlesBySectionWithPermission() {
-        requestPermission(loadArticleRationale, articleListingViewModel, Manifest.permission.INTERNET);
+    private void loadArticles() {
+        if (isConnected()) {
+            articleListingViewModel.load();
+        } else {
+            showConnectionError(articlesCoordinatorLayout);
+            articleListingViewModel.stopRefresh();
+        }
     }
 }

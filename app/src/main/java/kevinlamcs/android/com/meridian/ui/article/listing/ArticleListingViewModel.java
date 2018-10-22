@@ -14,13 +14,13 @@ import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.data.model.api.TopStoriesResponse;
 import kevinlamcs.android.com.meridian.ui.base.BaseViewModel;
 import kevinlamcs.android.com.meridian.util.livedata.SingleLiveEvent;
-import kevinlamcs.android.com.meridian.util.permission.PermissionListener;
 import kevinlamcs.android.com.meridian.util.log.ApplicationLogger;
 
-public class ArticleListingViewModel extends BaseViewModel implements PermissionListener {
+public class ArticleListingViewModel extends BaseViewModel {
 
     private final ArticleRepository repo;
     private MutableLiveData<String> section = new SingleLiveEvent<>();
+    private MutableLiveData<Boolean> loadError = new SingleLiveEvent<>();
     private MutableLiveData<Boolean> refresh = new SingleLiveEvent<>();
 
     @Inject
@@ -28,8 +28,7 @@ public class ArticleListingViewModel extends BaseViewModel implements Permission
         this.repo = repo;
     }
 
-    @Override
-    public void onPermissionGranted() {
+    public void load() {
         loadBySection(section.getValue());
     }
 
@@ -43,16 +42,18 @@ public class ArticleListingViewModel extends BaseViewModel implements Permission
                         .map(topStoriesResponse -> topStoriesResponse.getResults())
                         .subscribeOn(Schedulers.io())
                         .subscribe(
-                            articles -> {
-                                repo.clearLocalArticles();
-                                repo.addLocalArticles(articles);
-                            }, error -> {}
+                                articles -> {
+                                    repo.clearLocalArticles();
+                                    repo.addLocalArticles(articles);
+                                }, error -> {
+                                }
                         )
         );
     }
 
     private void onLoadError(Throwable error) {
         ApplicationLogger.e(error, this.getClass().getSimpleName());
+        loadError.setValue(true);
         stopRefresh();
     }
 
@@ -82,5 +83,9 @@ public class ArticleListingViewModel extends BaseViewModel implements Permission
 
     public MutableLiveData<String> getSection() {
         return section;
+    }
+
+    public MutableLiveData<Boolean> getLoadError() {
+        return loadError;
     }
 }

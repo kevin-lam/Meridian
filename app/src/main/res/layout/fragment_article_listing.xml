@@ -3,18 +3,19 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/drawer_article_topics"
+    android:id="@+id/drawer_article_sections"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout_articles"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
         <include layout="@layout/toolbar" />
 
         <android.support.v4.widget.SwipeRefreshLayout
-            android:id="@+id/articles_swipe_to_refresh"
+            android:id="@+id/swipe_to_refresh_articles"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior"
