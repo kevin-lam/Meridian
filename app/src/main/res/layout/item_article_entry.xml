@@ -53,6 +53,7 @@
         android:layout_height="@dimen/two_line_list_entry_image_width"
         android:layout_marginStart="@dimen/two_line_list_entry_margin_lr"
         android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
+        android:contentDescription="@string/image_article_listing"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/article_listing_date_image_barrier"

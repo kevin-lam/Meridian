@@ -9,7 +9,6 @@ import dagger.Module;
 import dagger.Provides;
 import kevinlamcs.android.com.meridian.data.local.DatabaseModule;
 import kevinlamcs.android.com.meridian.data.remote.NetworkModule;
-import kevinlamcs.android.com.meridian.util.UtilModule;
 import kevinlamcs.android.com.meridian.util.image.ImageModule;
 
 @Module(includes = {

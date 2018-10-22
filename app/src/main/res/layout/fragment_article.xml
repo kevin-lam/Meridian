@@ -6,13 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-
-        <include layout="@layout/toolbar"
-            android:id="@+id/toolbar"/>
-    </android.support.design.widget.AppBarLayout>
+    <include
+        layout="@layout/toolbar" />
 
     <android.support.v4.widget.NestedScrollView
         android:id="@+id/article_scroll_container"
@@ -41,9 +36,9 @@
                     android:id="@+id/article_description_chip_group"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:contentDescription="@string/tags"
-                    app:singleLine="true">
-                </android.support.design.chip.ChipGroup>
+                    android:contentDescription="@string/chip_group_description_tags"
+                    app:singleLine="true"/>
+
             </HorizontalScrollView>
 
             <ImageView
@@ -54,12 +49,13 @@
                 android:layout_marginEnd="@dimen/detail_general_margin_lr"
                 android:layout_marginStart="@dimen/detail_general_margin_lr"
                 android:layout_marginTop="@dimen/detail_general_margin_tb"
+                android:contentDescription="@string/image_article"
+                android:scaleType="centerCrop"
+                android:src="@drawable/item_article_entry_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.45"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/article_description_scroll_container"
-                android:src="@drawable/item_article_entry_image_placeholder"
-                android:scaleType="centerCrop"
                 tools:layout_height="208dp"
                 tools:src="@color/colorImagePlaceholder" />
 
@@ -145,7 +141,7 @@
                 android:layout_marginEnd="@dimen/detail_general_margin_lr"
                 android:layout_marginStart="@dimen/outlined_button_padding_lr"
                 android:layout_marginTop="@dimen/detail_general_margin_tb"
-                android:text="@string/article_read_more_button_label"
+                android:text="@string/button_label_article_read_more"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/article_author" />

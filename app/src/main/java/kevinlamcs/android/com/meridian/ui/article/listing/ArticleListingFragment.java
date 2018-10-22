@@ -5,8 +5,13 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.design.widget.NavigationView;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.view.GravityCompat;
+import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -25,6 +30,7 @@ import butterknife.BindView;
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseFragment;
+import kevinlamcs.android.com.meridian.util.AppConstants;
 
 public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel> {
 
@@ -39,7 +45,13 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    @BindString(R.string.load_article_rationale)
+    @BindView(R.id.drawer_article_topics)
+    DrawerLayout articleTopicDrawerLayout;
+
+    @BindView(R.id.navigation_view_article_sections)
+    NavigationView articleTopicNavigationView;
+
+    @BindString(R.string.snackbar_load_article_rationale)
     String loadArticleRationale;
 
     @Inject
@@ -76,8 +88,18 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setupDefaultSection();
+    }
+
+    private void setupDefaultSection() {
+        articleListingViewModel.sectionSelected(AppConstants.SECTION_HOME);
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        inflater.inflate(R.menu.article_listing, menu);
+        inflater.inflate(R.menu.fragment_article_listing, menu);
     }
 
     @Override
@@ -85,8 +107,12 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
         switch (item.getItemId()) {
             case R.id.menu_articles_refresh:
                 articleListingViewModel.startRefresh();
-                refresh();
-                break;
+                loadArticlesBySectionWithPermission();
+                return true;
+            case android.R.id.home:
+                articleTopicDrawerLayout.openDrawer(GravityCompat.START);
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -96,8 +122,31 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
         super.onViewCreated(view, savedInstanceState);
         setHasOptionsMenu(true);
         setSupportActionBar(toolbar);
+        setupDrawer();
         setupRecyclerView();
         setupSwipeRefreshLayout();
+    }
+
+    private void setupDrawer() {
+        if (isAdded()) {
+            ActionBar actionBar = ((AppCompatActivity)getActivity()).getSupportActionBar();
+            actionBar.setDisplayHomeAsUpEnabled(true);
+            actionBar.setHomeAsUpIndicator(R.drawable.ic_menu);
+            articleTopicNavigationView.getMenu().getItem(0).setChecked(true);
+            articleTopicNavigationView.setNavigationItemSelectedListener(menuItem -> {
+                onNavigationItemSelected(menuItem);
+                return true;
+            });
+        }
+    }
+
+    private void onNavigationItemSelected(MenuItem navigationItem) {
+        articleListingViewModel.startRefresh();
+        articleListingViewModel.sectionSelected(new ArticleSection(navigationItem.getItemId(), navigationItem.getTitle().toString())
+                .toString());
+        loadArticlesBySectionWithPermission();
+        navigationItem.setCheckable(true);
+        articleTopicDrawerLayout.closeDrawers();
     }
 
     private void setupRecyclerView() {
@@ -110,13 +159,18 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     }
 
     private void setupSwipeRefreshLayout() {
-        articleSwipeToRefresh.setOnRefreshListener(this::refresh);
+        articleSwipeToRefresh.setOnRefreshListener(this::loadArticlesBySectionWithPermission);
     }
 
     @Override
     public void onDestroyView() {
         super.onDestroyView();
+        tearDownDrawer();
         tearDownRecyclerView();
+    }
+
+    private void tearDownDrawer() {
+        articleTopicNavigationView.setNavigationItemSelectedListener(null);
     }
 
     private void tearDownRecyclerView() {
@@ -127,18 +181,18 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     public void subscribeToViewModelChanges() {
         articleListingViewModel.getArticles()
             .observe(this, articleListingAdapter::setArticles);
-        articleListingViewModel.getRefresh().observe(this, shouldRefresh -> articleSwipeToRefresh.setRefreshing(shouldRefresh));
+        articleListingViewModel.getRefresh().observe(this, articleSwipeToRefresh::setRefreshing);
+        articleListingViewModel.getSection().observe(this, section -> loadArticlesBySectionWithPermission());
     }
 
     @Override
-    public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
-        super.onViewStateRestored(savedInstanceState);
-        if (firstTimeCreated(savedInstanceState)) {
-            refresh();
-        }
+    public void unsubscribeToViewModelChanges() {
+        articleListingViewModel.getArticles().removeObservers(this);
+        articleListingViewModel.getRefresh().removeObservers(this);
+        articleListingViewModel.getSection().removeObservers(this);
     }
 
-    private void refresh() {
+    private void loadArticlesBySectionWithPermission() {
         requestPermission(loadArticleRationale, articleListingViewModel, Manifest.permission.INTERNET);
     }
 }

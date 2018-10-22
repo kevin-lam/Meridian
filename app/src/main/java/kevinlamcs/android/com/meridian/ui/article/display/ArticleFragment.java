@@ -128,6 +128,11 @@ public class ArticleFragment extends BaseFragment {
     }
 
     @Override
+    public void unsubscribeToViewModelChanges() {
+        articleViewModel.getArticle().removeObservers(this);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()) {
             case android.R.id.home:

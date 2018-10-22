@@ -20,4 +20,16 @@ public class AppConstants {
 
     // Service
     public static final String CUSTOM_TAB_SERVICE = "android.support.customtabs.action.CustomTabsService";
+
+    // Section
+    public static final String SECTION_HOME = "home";
+    public static final String SECTION_WORLD = "world";
+    public static final String SECTION_NATIONAL = "national";
+    public static final String SECTION_POLITICS = "politics";
+    public static final String SECTION_BUSINESS = "business";
+    public static final String SECTION_SCIENCE = "science";
+    public static final String SECTION_TECHNOLOGY = "technology";
+    public static final String SECTION_SPORTS = "sports";
+    public static final String SECTION_FOOD = "food";
+    public static final String SECTION_TRAVEL = "travel";
 }

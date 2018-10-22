@@ -42,6 +42,7 @@ public class ArticleListingViewHolder extends BaseViewHolder<Article> {
         this.imageLoader = new ImageLoader(new WeakReference<>(fragment.getContext()));
         this.timeFormatter = new TimeFormatter();
         this.articleListingItemViewModel = new ArticleListingItemViewModel();
+        unsubscribeToViewModelChanges();
         subscribeToViewModelChanges();
     }
 
@@ -66,5 +67,9 @@ public class ArticleListingViewHolder extends BaseViewHolder<Article> {
                         .into(image);
             }
         });
+    }
+
+    public void unsubscribeToViewModelChanges() {
+        articleListingItemViewModel.getArticle().removeObservers(fragment);
     }
 }

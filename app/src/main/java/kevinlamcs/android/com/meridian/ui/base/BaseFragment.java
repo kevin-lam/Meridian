@@ -15,13 +15,14 @@ import com.tbruyelle.rxpermissions2.RxPermissions;
 
 import butterknife.ButterKnife;
 import dagger.android.support.AndroidSupportInjection;
-import kevinlamcs.android.com.meridian.util.listener.PermissionListener;
+import kevinlamcs.android.com.meridian.util.permission.PermissionListener;
 
 public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
 
     public abstract int getLayoutId();
     public abstract V getViewModel();
     public abstract void subscribeToViewModelChanges();
+    public abstract void unsubscribeToViewModelChanges();
 
     private V viewModel;
 
@@ -48,6 +49,11 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        resubscribeToViewModelChanges();
+    }
+
+    private void resubscribeToViewModelChanges() {
+        unsubscribeToViewModelChanges();
         subscribeToViewModelChanges();
     }
 

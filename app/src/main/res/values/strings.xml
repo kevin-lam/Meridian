@@ -1,10 +1,33 @@
 <resources>
     <string name="app_name">Meridian</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="load_article_rationale">Please allow internet access for articles to be displayed.</string>
-    <string name="article_read_more_button_label">Read More</string>
-    <string name="refresh">Refresh</string>
-    <string name="tags">Tags</string>
+    <!-- Snackbar -->
+    <string name="snackbar_load_article_rationale">Please allow internet access for articles to be displayed.</string>
+
+    <!-- Button -->
+    <string name="button_label_article_read_more">Read More</string>
+
+    <!-- MenuItem -->
+    <string name="menuitem_refresh">Refresh</string>
+
+    <!-- ChipGroup -->
+    <string name="chip_group_description_tags">Tags</string>
+
+    <!-- Navigation drawer -->
+    <string name="nav_front">Front</string>
+    <string name="nav_world">World</string>
+    <string name="nav_us">US</string>
+    <string name="nav_politics">Politics</string>
+    <string name="nav_business">Business</string>
+    <string name="nav_technology">Technology</string>
+    <string name="nav_tech">Tech</string>
+    <string name="nav_science">Science</string>
+    <string name="nav_sports">Sports</string>
+    <string name="nav_food">Food</string>
+    <string name="nav_travel">Travel</string>
+
+    <!-- ImageView -->
+    <string name="image_article">Article image</string>
+    <string name="image_article_listing">Article listing image</string>
 
 </resources>
