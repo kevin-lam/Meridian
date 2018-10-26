@@ -79,4 +79,5 @@ ext {
     junitRulesVersion = '1.0.2'
     expressoVersion = '3.0.2'
     uiAutomatorVersion = '2.1.3'
+    leakCanaryVersion = '1.6.2'
 }

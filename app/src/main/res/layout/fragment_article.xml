@@ -49,7 +49,7 @@
                 android:layout_marginEnd="@dimen/detail_general_margin_lr"
                 android:layout_marginStart="@dimen/detail_general_margin_lr"
                 android:layout_marginTop="@dimen/detail_general_margin_tb"
-                android:contentDescription="@string/image_article"
+                android:contentDescription="@string/content_description_image_article"
                 android:scaleType="centerCrop"
                 android:src="@drawable/item_article_entry_image_placeholder"
                 app:layout_constraintEnd_toEndOf="parent"

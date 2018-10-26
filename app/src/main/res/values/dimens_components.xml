@@ -27,4 +27,10 @@
     <dimen name="decorator_entry_dash_width">1dp</dimen>
     <dimen name="decorator_entry_dash_gap">3dp</dimen>
     <dimen name="decorator_entry_height">1.5dp</dimen>
+
+    <!-- ImageButton -->
+    <dimen name="imagebutton_margin_lr">16dp</dimen>
+
+    <!-- TextView -->
+    <dimen name="textview_margin_lr">16dp</dimen>
 </resources>

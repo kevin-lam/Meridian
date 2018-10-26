@@ -15,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import butterknife.ButterKnife;
+import butterknife.Unbinder;
 import dagger.android.support.AndroidSupportInjection;
 import kevinlamcs.android.com.meridian.R;
 
@@ -29,6 +30,8 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     public abstract void unsubscribeToViewModelChanges();
 
     private V viewModel;
+
+    private Unbinder unbinder;
 
     @Override
     public void onAttach(Context context) {
@@ -46,19 +49,27 @@ public abstract class BaseFragment<V extends BaseViewModel> extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutId(), container, false);
-        ButterKnife.bind(this, view);
+        unbinder = ButterKnife.bind(this, view);
         return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        unsubscribeToViewModelChanges();
+        unbinder.unbind();
     }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        resubscribeToViewModelChanges();
+        subscribeToViewModelChanges();
     }
 
-    private void resubscribeToViewModelChanges() {
-        unsubscribeToViewModelChanges();
-        subscribeToViewModelChanges();
+    protected void setActionBarNoTitle() {
+        if (isAdded()) {
+            ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(null);
+        }
     }
 
     protected boolean isConnected() {

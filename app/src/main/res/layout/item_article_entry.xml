@@ -4,7 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/article_entry"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
     <TextView
         android:id="@+id/article_listing_section"
@@ -53,7 +56,7 @@
         android:layout_height="@dimen/two_line_list_entry_image_width"
         android:layout_marginStart="@dimen/two_line_list_entry_margin_lr"
         android:layout_marginEnd="@dimen/two_line_list_entry_margin_lr"
-        android:contentDescription="@string/image_article_listing"
+        android:contentDescription="@string/content_description_image_article_entry"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/article_listing_date_image_barrier"

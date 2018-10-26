@@ -47,6 +47,7 @@
         android:layout_gravity="start"
         android:fitsSystemWindows="true"
         app:itemTextAppearance="@style/SectionSubtitle1"
-        app:menu="@menu/navigation_article_topic" />
+        app:menu="@menu/navigation_article_topic"
+        app:headerLayout="@layout/navigation_header_article_sections"/>
 
 </android.support.v4.widget.DrawerLayout>

@@ -29,8 +29,7 @@
     <string name="nav_travel">Travel</string>
 
     <!-- ImageView -->
-    <string name="image_article">Article image</string>
-    <string name="image_article_listing">Article listing image</string>
-
+    <string name="content_description_image_article">Article image</string>
+    <string name="content_description_image_article_entry">Article listing image</string>
 
 </resources>

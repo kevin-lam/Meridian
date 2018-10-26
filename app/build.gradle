@@ -92,4 +92,7 @@ dependencies {
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.expressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.expressoVersion"
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$rootProject.uiAutomatorVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$rootProject.leakCanaryVersion"
 }

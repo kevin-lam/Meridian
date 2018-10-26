@@ -70,7 +70,13 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:letterSpacing">0.15</item>
     </style>
-    
+
+    <!-- Title -->
+    <style name="Title" parent="H6">
+        <item name="fontFamily">@font/old_english</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
     <!-- Entry -->
     <style name="EntryOverline" parent="Overline">
         <item name="fontFamily">@font/open_sans_bold</item>
@@ -86,7 +92,6 @@
         <item name="fontFamily">@font/open_sans</item>
         <item name="android:textColor">@color/gray600</item>
     </style>
-
     
     <!-- Detail -->
     <style name="DetailH3Headline" parent="H3">

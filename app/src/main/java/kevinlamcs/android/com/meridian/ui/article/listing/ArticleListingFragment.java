@@ -13,6 +13,7 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.AppCompatImageButton;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -72,6 +73,8 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
 
     private ArticleListingViewModel articleListingViewModel;
 
+    private AppCompatImageButton closeDrawerButton;
+
     public ArticleListingFragment() {
     }
 
@@ -124,11 +127,16 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setHasOptionsMenu(true);
-        setSupportActionBar(articlesToolbar);
+        setupToolbar();
         setupDrawer();
         setupRecyclerView();
         setupSwipeRefreshLayout();
+    }
+
+    private void setupToolbar() {
+        setHasOptionsMenu(true);
+        setSupportActionBar(articlesToolbar);
+        setActionBarNoTitle();
     }
 
     private void setupDrawer() {
@@ -141,6 +149,8 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
                 onNavigationItemSelected(menuItem);
                 return true;
             });
+            closeDrawerButton = articleSectionsNavigationView.getHeaderView(0).findViewById(R.id.navigation_view_article_sections_close_drawer_button);
+            closeDrawerButton.setOnClickListener(view -> articleSectionsDrawerLayout.closeDrawers());
         }
     }
 
@@ -168,17 +178,19 @@ public class ArticleListingFragment extends BaseFragment<ArticleListingViewModel
 
     @Override
     public void onDestroyView() {
-        super.onDestroyView();
         tearDownDrawer();
         tearDownRecyclerView();
+        super.onDestroyView();
     }
 
     private void tearDownDrawer() {
         articleSectionsNavigationView.setNavigationItemSelectedListener(null);
+        closeDrawerButton = null;
     }
 
     private void tearDownRecyclerView() {
         articleRecyclerView.setLayoutManager(null);
+        articleRecyclerView.setAdapter(null);
     }
 
     @Override

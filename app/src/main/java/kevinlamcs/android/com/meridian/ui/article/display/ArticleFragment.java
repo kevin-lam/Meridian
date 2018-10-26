@@ -62,9 +62,11 @@ public class ArticleFragment extends BaseFragment {
     @Inject
     BrowserClient client;
 
+    @Inject
+    ViewModelProvider.Factory viewModelFactory;
+
     private static final String ARG_ARTICLE = "ARTICLE";
     private ArticleViewModel articleViewModel;
-    private ViewModelProvider.Factory viewModelFactory;
     private ImageLoader imageLoader;
 
     public ArticleFragment() {
@@ -87,10 +89,15 @@ public class ArticleFragment extends BaseFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        setSupportActionBar(toolbar);
-        setHasOptionsMenu(true);
-        showBackButton(true);
+        setupToolbar();
         loadArticle();
+    }
+
+    private void setupToolbar() {
+        setHasOptionsMenu(true);
+        setSupportActionBar(toolbar);
+        setActionBarNoTitle();
+        showBackButton(true);
     }
 
     private void loadArticle() {

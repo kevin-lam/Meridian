@@ -3,6 +3,8 @@ package kevinlamcs.android.com.meridian;
 import android.app.Activity;
 import android.app.Application;
 
+import com.squareup.leakcanary.LeakCanary;
+
 import javax.inject.Inject;
 
 import dagger.android.DispatchingAndroidInjector;
@@ -21,6 +23,7 @@ public class MeridianApp extends Application implements HasActivityInjector {
 
         setupDagger();
         setupTimber();
+        setupLeakCanary();
     }
 
     @Override
@@ -37,5 +40,12 @@ public class MeridianApp extends Application implements HasActivityInjector {
 
     private void setupTimber() {
         ApplicationLogger.init();
+    }
+
+    private void setupLeakCanary() {
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(this);
     }
 }
