@@ -1,8 +1,5 @@
 package kevinlamcs.android.com.meridian;
 
-import android.support.test.filters.MediumTest;
-import android.support.test.filters.SmallTest;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -30,7 +27,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@SmallTest
 @RunWith(JUnit4.class)
 public class ApiHelperTest {
 

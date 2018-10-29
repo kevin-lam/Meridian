@@ -1,8 +1,5 @@
 package kevinlamcs.android.com.meridian;
 
-import android.support.test.filters.SmallTest;
-
-import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -19,7 +16,6 @@ import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.not;
 
 @RunWith(JUnit4.class)
-@SmallTest
 public class StringListTypeConverterTest {
 
     @Test

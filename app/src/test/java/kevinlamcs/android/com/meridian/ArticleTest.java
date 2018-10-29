@@ -1,7 +1,5 @@
 package kevinlamcs.android.com.meridian;
 
-import android.support.test.filters.SmallTest;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
@@ -17,7 +15,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.is;
 
 @RunWith(JUnit4.class)
-@SmallTest
 public class ArticleTest {
 
     @Test
@@ -56,3 +53,4 @@ public class ArticleTest {
         assertThat(article1.equals(article2), is(true));
     }
 }
+

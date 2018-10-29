@@ -91,7 +91,7 @@ dependencies {
     testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrestVersion"
     androidTestImplementation "android.arch.core:core-testing:$rootProject.architecturalComponentsVersion"
     androidTestImplementation "com.android.support.test:rules:$rootProject.junitRulesVersion"
-    testImplementation "com.android.support.test:runner:$rootProject.junitRunnerVersion"
+    androidTestImplementation "com.android.support.test:runner:$rootProject.junitRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.expressoVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.expressoVersion"
     androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$rootProject.uiAutomatorVersion"

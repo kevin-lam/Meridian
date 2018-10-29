@@ -1,7 +1,5 @@
 package kevinlamcs.android.com.meridian;
 
-import android.support.test.filters.MediumTest;
-
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -10,7 +8,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.JUnit4;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import io.reactivex.observers.TestObserver;
@@ -24,7 +21,6 @@ import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-@MediumTest
 @RunWith(JUnit4.class)
 public class ApiTest {
     NYTimesArticleSource articleSource;
@@ -34,8 +30,8 @@ public class ApiTest {
 
         OkHttpClient client = new OkHttpClient.Builder()
                 .addInterceptor(new ParameterInterceptor.Builder()
-                    .addParameter(AppConstants.TOP_STORIES_API_KEY_HEADER, BuildConfig.TOP_STORIES_API_KEY)
-                    .build()
+                        .addParameter(AppConstants.TOP_STORIES_API_KEY_HEADER, BuildConfig.TOP_STORIES_API_KEY)
+                        .build()
                 )
                 .build();
 

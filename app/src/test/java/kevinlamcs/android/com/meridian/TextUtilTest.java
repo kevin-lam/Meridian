@@ -1,6 +1,5 @@
 package kevinlamcs.android.com.meridian;
 
-import android.support.test.filters.SmallTest;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +11,6 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 import static org.hamcrest.Matchers.is;
 
-@SmallTest
 @RunWith(JUnit4.class)
 public class TextUtilTest {
 
