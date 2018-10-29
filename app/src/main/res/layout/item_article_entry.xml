@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/article_entry"
@@ -7,7 +8,8 @@
     android:layout_height="wrap_content"
     android:clickable="true"
     android:focusable="true"
-    android:foreground="?android:attr/selectableItemBackground">
+    android:foreground="?android:attr/selectableItemBackground"
+    android:transitionGroup="true">
 
     <TextView
         android:id="@+id/article_listing_section"
@@ -61,8 +63,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/article_listing_date_image_barrier"
         app:layout_constraintTop_toTopOf="parent"
-        android:src="@drawable/item_article_entry_image_placeholder"
-        tools:src="@drawable/ic_launcher_background" />
+        android:src="@drawable/item_article_entry_image_placeholder" />
 
     <android.support.constraint.Barrier
         android:id="@+id/article_listing_section_title_barrier"

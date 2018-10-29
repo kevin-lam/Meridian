@@ -1,6 +1,8 @@
 package kevinlamcs.android.com.meridian.util;
 
 
+import android.os.Build;
+
 import org.joda.time.DateTime;
 import org.joda.time.Period;
 
@@ -8,9 +10,12 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import static kevinlamcs.android.com.meridian.util.AppConstants.TIME_PATTERN_ISO;
+import static kevinlamcs.android.com.meridian.util.AppConstants.TIME_PATTERN_RFC;
+
 public class TimeFormatter {
 
-    public static final String TIME_PATTERN = AppConstants.TIME_PATTERN;
+    public static final String TIME_PATTERN = TIME_PATTERN_ISO;
 
     public String elapsed(String since) {
         long sinceInMillis = time(since);
@@ -43,7 +48,14 @@ public class TimeFormatter {
     }
 
     public long time(String since) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat(TIME_PATTERN);
+        String pattern;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+            pattern = TIME_PATTERN_ISO;
+        } else {
+            pattern = TIME_PATTERN_RFC;
+            since = TextUtil.removeLast(":", since);
+        }
+        SimpleDateFormat dateFormat = new SimpleDateFormat(pattern);
         Date date = new Date();
 
         try {

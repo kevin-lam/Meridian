@@ -95,4 +95,5 @@ dependencies {
     debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
     releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
     debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$rootProject.leakCanaryVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.okhttpVersion"
 }

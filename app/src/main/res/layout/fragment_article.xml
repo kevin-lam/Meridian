@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    app:elevation="24dp">
 
     <include
         layout="@layout/toolbar" />
@@ -13,12 +14,13 @@
         android:id="@+id/article_scroll_container"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fillViewport="true"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/article"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             tools:context=".ui.article.display.ArticleFragment">
 
             <HorizontalScrollView
@@ -56,7 +58,6 @@
                 app:layout_constraintHeight_percent="0.45"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/article_description_scroll_container"
-                tools:layout_height="208dp"
                 tools:src="@color/colorImagePlaceholder" />
 
             <TextView

@@ -5,9 +5,9 @@ public class TextUtil {
     public static final String capitalize(String phrase) {
         String[] words = phrase.split(" ");
         StringBuilder sb = new StringBuilder();
-        for (String word : words) {
-            sb.append(TextUtil.toUpperCaseAt(0, word));
-            sb.append(" ");
+        for (int i=0; i < words.length; i++) {
+            sb.append(TextUtil.toUpperCaseAt(0, words[i]));
+            if (i != words.length - 1) sb.append(" ");
         }
         return sb.toString();
     }
@@ -30,7 +30,12 @@ public class TextUtil {
         return word;
     }
 
-    public static final String removePunctuation(String word) {
+    public static final String removeLast(String regex, String word) {
+        int index = word.lastIndexOf(regex);
+        return word.substring(0, index) + word.substring(index + 1, word.length());
+    }
+
+    public static final String removeNonAlphaNumeric(String word) {
         StringBuilder sb = new StringBuilder();
         for (char c : word.toCharArray()) {
             if (Character.isLetterOrDigit(c)) {

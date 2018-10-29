@@ -5,10 +5,8 @@ import android.arch.lifecycle.ViewModelProvider;
 import android.arch.lifecycle.ViewModelProviders;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.design.button.MaterialButton;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.chip.ChipGroup;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
@@ -22,7 +20,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
-import dagger.Provides;
 import kevinlamcs.android.com.meridian.R;
 import kevinlamcs.android.com.meridian.data.model.api.Article;
 import kevinlamcs.android.com.meridian.ui.base.BaseFragment;
@@ -59,6 +56,9 @@ public class ArticleFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
+    @BindView(R.id.article)
+    ConstraintLayout container;
+
     @Inject
     BrowserClient client;
 
@@ -66,16 +66,18 @@ public class ArticleFragment extends BaseFragment {
     ViewModelProvider.Factory viewModelFactory;
 
     private static final String ARG_ARTICLE = "ARTICLE";
+    private static final String ARG_TRANSITION = "TRANSITION";
     private ArticleViewModel articleViewModel;
     private ImageLoader imageLoader;
 
     public ArticleFragment() {
     }
 
-    public static ArticleFragment newInstance(Article article) {
+    public static ArticleFragment newInstance(Article article, String transitionName) {
         ArticleFragment fragment = new ArticleFragment();
         Bundle args = new Bundle();
         args.putSerializable(ARG_ARTICLE, article);
+        args.putString(ARG_TRANSITION, transitionName);
         fragment.setArguments(args);
         return fragment;
     }
@@ -90,6 +92,7 @@ public class ArticleFragment extends BaseFragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         setupToolbar();
+        setTransitionName();
         loadArticle();
     }
 
@@ -98,6 +101,10 @@ public class ArticleFragment extends BaseFragment {
         setSupportActionBar(toolbar);
         setActionBarNoTitle();
         showBackButton(true);
+    }
+
+    private void setTransitionName() {
+        container.setTransitionName(this.getArguments().getString(ARG_TRANSITION));
     }
 
     private void loadArticle() {

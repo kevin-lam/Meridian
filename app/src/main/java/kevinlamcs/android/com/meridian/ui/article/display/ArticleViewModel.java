@@ -42,7 +42,7 @@ public class ArticleViewModel extends BaseViewModel {
         LayoutInflater inflater = (LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         for (String description : descriptionFacets) {
             Chip tag = (Chip) inflater.inflate(R.layout.chip_description, descriptionTags, false);
-            tag.setChipText('#' + TextUtil.removePunctuation(description));
+            tag.setChipText('#' + TextUtil.removeNonAlphaNumeric(description));
             descriptionTags.addView(tag);
         }
     }

@@ -73,7 +73,7 @@ public class ArticleListingAdapter extends ListAdapter<Article, ArticleListingVi
     @Override
     public RequestBuilder<?> getPreloadRequestBuilder(@NonNull Article item) {
         if (item.hasPhoto()) {
-         //   return imageLoader.load(item.getJumboPhotoUrl()).thumbnail(item.getLargeThumbnailUrl()).getGlideRequest();
+            return imageLoader.load(item.getJumboPhotoUrl()).thumbnail(item.getLargeThumbnailUrl()).getGlideRequest();
         }
         return null;
     }

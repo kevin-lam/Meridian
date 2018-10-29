@@ -13,7 +13,8 @@ public class AppConstants {
     public static final int PRELOAD_AHEAD_ITEM_COUNT = 5;
 
     // Time
-    public static final String TIME_PATTERN = "yyyy-MM-dd'T'HH:mm:ssXXX";
+    public static final String TIME_PATTERN_ISO = "yyyy-MM-dd'T'HH:mm:ssXXX";
+    public static final String TIME_PATTERN_RFC = "yyyy-MM-dd'T'HH:mm:ssZ";
     public static final String DATE_FORMAT = "%d/%d";
     public static final String HOUR_FORMAT = "%dH";
     public static final String MINUTE_FORMAT = "%dM";

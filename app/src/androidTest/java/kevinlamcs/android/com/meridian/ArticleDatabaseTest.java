@@ -67,7 +67,7 @@ public class ArticleDatabaseTest {
     }
 
     @After
-    public void closeDb() throws IOException {
+    public void closeDb() {
         db.close();
     }
 
@@ -107,7 +107,7 @@ public class ArticleDatabaseTest {
         List<String> articleTopic = Arrays.asList("Politics");
         Article article = new Article();
         article.setTitle("Test");
-        article.setAuthor("By author");;
+        article.setAuthor("By author");
         article.setDescriptionFacet(articleTopic);
 
         dao.add(article);

@@ -1,5 +1,6 @@
 package kevinlamcs.android.com.meridian.ui.article.item;
 
+import android.support.constraint.ConstraintLayout;
 import android.support.v4.app.Fragment;
 import android.view.View;
 import android.widget.ImageView;
@@ -30,6 +31,10 @@ public class ArticleListingViewHolder extends BaseViewHolder<Article> {
     @BindView(R.id.article_listing_image)
     ImageView image;
 
+    @BindView(R.id.article_entry)
+    ConstraintLayout itemContainer;
+
+    private static final String OPEN_ARTICLE_TRANSITION = "open article transition";
     private final ArticleListingItemViewModel articleListingItemViewModel;
     private final ImageLoader imageLoader;
     private final TimeFormatter timeFormatter;
@@ -49,6 +54,7 @@ public class ArticleListingViewHolder extends BaseViewHolder<Article> {
     @Override
     public void onBind(Article article) {
         articleListingItemViewModel.setArticle(article);
+        articleListingItemViewModel.setTransitionName(OPEN_ARTICLE_TRANSITION + article.getTitle());
     }
 
     @OnClick
@@ -67,9 +73,12 @@ public class ArticleListingViewHolder extends BaseViewHolder<Article> {
                         .into(image);
             }
         });
+
+        articleListingItemViewModel.getTransitionName().observe(fragment, transitionName -> itemContainer.setTransitionName(transitionName));
     }
 
     public void unsubscribeToViewModelChanges() {
         articleListingItemViewModel.getArticle().removeObservers(fragment);
+        articleListingItemViewModel.getTransitionName().removeObservers(fragment);
     }
 }
