@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Chip !-->
+    <style name="RectangleChip" parent="Base.Widget.MaterialComponents.Chip">
+        <item name="chipCornerRadius">@dimen/chip_corner_radius</item>
+        <item name="chipStrokeColor">@android:color/transparent</item>
+        <item name="chipStrokeWidth">@dimen/chip_border_width</item>
+        <item name="chipBackgroundColor">@android:color/transparent</item>
+        <item name="android:gravity">center</item>
+        <item name="android:paddingStart">@dimen/chip_padding_lr</item>
+        <item name="android:paddingEnd">@dimen/chip_padding_lr</item>
+        <item name="android:textAppearance">@style/DetailSubtitle1</item>
+    </style>
+
+    <!-- HorizontalView !-->
+    <style name="HorizontalChipScroller">
+        <item name="android:paddingTop">4dp</item>
+        <item name="android:paddingBottom">8dp</item>
+        <item name="android:paddingStart">4dp</item>
+        <item name="android:paddingEnd">4dp</item>
+    </style>
+
+    <!-- Button !-->
+    <style name="OutlinedButton" parent="Widget.MaterialComponents.Button.TextButton">
+        <item name="strokeColor">@color/gray400</item>
+        <item name="strokeWidth">@dimen/outlined_button_stroke_width</item>
+        <item name="android:paddingLeft">@dimen/outlined_button_padding_lr</item>
+        <item name="android:paddingRight">@dimen/outlined_button_padding_lr</item>
+    </style>
+
+</resources>

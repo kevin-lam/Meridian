@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="list_entry_content_image_guideline_percent">0.70</dimen>
+
+    <!-- Two Line Lists -->
+    <dimen name="two_line_list_entry_image_height">72dp</dimen>
+    <dimen name="two_line_list_entry_image_width">72dp</dimen>
+    <dimen name="two_line_list_entry_margin_lr">16dp</dimen>
+    <dimen name="two_line_list_entry_margin_tb">16dp</dimen>
+    <dimen name="two_line_list_entry_first_line_second_line_spacing">4dp</dimen>
+
+    <!-- Chips -->
+    <dimen name="chip_corner_radius">0dp</dimen>
+    <dimen name="chip_border_width">1dp</dimen>
+    <dimen name="chip_padding_lr">12dp</dimen>
+
+    <!-- Button -->
+    <dimen name="outlined_button_padding_lr">16dp</dimen>
+    <dimen name="outlined_button_stroke_width">1dp</dimen>
+
+    <!-- Details -->
+    <dimen name="detail_general_margin_lr">16dp</dimen>
+    <dimen name="detail_general_margin_tb">16dp</dimen>
+
+    <!-- Decorator -->
+    <dimen name="decorator_entry_width">1dp</dimen>
+    <dimen name="decorator_entry_dash_width">1dp</dimen>
+    <dimen name="decorator_entry_dash_gap">3dp</dimen>
+    <dimen name="decorator_entry_height">1.5dp</dimen>
+
+    <!-- ImageButton -->
+    <dimen name="imagebutton_margin_lr">16dp</dimen>
+
+    <!-- TextView -->
+    <dimen name="textview_margin_lr">16dp</dimen>
+</resources>

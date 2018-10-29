@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.DrawerLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/drawer_article_sections"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <android.support.design.widget.CoordinatorLayout
+        android:id="@+id/coordinator_layout_articles"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <include layout="@layout/toolbar" />
+
+        <android.support.v4.widget.SwipeRefreshLayout
+            android:id="@+id/swipe_to_refresh_articles"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_behavior="@string/appbar_scrolling_view_behavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/articles"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:transitionGroup="false"
+                android:clipChildren="false"
+                tools:itemCount="2"
+                tools:layoutManager="android.support.v7.widget.LinearLayoutManager"
+                tools:listitem="@layout/item_article_entry" />
+
+        </android.support.v4.widget.SwipeRefreshLayout>
+
+    </android.support.design.widget.CoordinatorLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view_article_sections"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:fitsSystemWindows="true"
+        app:itemTextAppearance="@style/SectionSubtitle1"
+        app:menu="@menu/navigation_article_topic"
+        app:headerLayout="@layout/navigation_header_article_sections"/>
+
+</android.support.v4.widget.DrawerLayout>

@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Base -->
+    <style name="H1">
+        <item name="android:textSize">@dimen/font_h1</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:letterSpacing">-1.5</item>
+    </style>
+    <style name="H2">
+        <item name="android:textSize">@dimen/font_h2</item>
+        <item name="android:fontFamily">sans-serif-light</item>
+        <item name="android:letterSpacing">-0.0156</item>
+    </style>
+    <style name="H3">
+        <item name="android:textSize">@dimen/font_h3</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+    <style name="H4">
+        <item name="android:textSize">@dimen/font_h4</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.0073</item>
+    </style>
+    <style name="H5">
+        <item name="android:textSize">@dimen/font_h5</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0</item>
+    </style>
+    <style name="H6">
+        <item name="android:textSize">@dimen/font_h6</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.0075</item>
+    </style>
+    <style name="Subtitle1">
+        <item name="android:textSize">@dimen/font_subtitle1</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.009</item>
+    </style>
+    
+    <style name="Subtitle2">
+        <item name="android:textSize">@dimen/font_subtitle2</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:letterSpacing">0.007</item>
+    </style>
+    <style name="Body1">
+        <item name="android:textSize">@dimen/font_body1</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.031</item>
+    </style>
+    <style name="Body2">
+        <item name="android:textSize">@dimen/font_body2</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.017</item>
+    </style>
+    <style name="Button">
+        <item name="android:textSize">@dimen/font_button</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    <style name="Caption">
+        <item name="android:textSize">@dimen/font_caption</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:letterSpacing">0.03</item>
+    </style>
+    <style name="Overline">
+        <item name="android:textSize">@dimen/font_overline</item>
+        <item name="android:fontFamily">sans-serif</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:letterSpacing">0.15</item>
+    </style>
+
+    <!-- Title -->
+    <style name="Title" parent="H6">
+        <item name="fontFamily">@font/old_english</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Entry -->
+    <style name="EntryOverline" parent="Overline">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="EntryOverlineGray" parent="EntryOverline">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/gray400</item>
+    </style>
+
+    <style name="EntrySubtitle1" parent="Subtitle1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/gray600</item>
+    </style>
+    
+    <!-- Detail -->
+    <style name="DetailH3Headline" parent="H3">
+        <item name="fontFamily">@font/pt_serif_bold_italic</item>
+    </style>
+    <style name="DetailH6Headline" parent="H6">
+        <item name="fontFamily">@font/pt_serif_bold_italic</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="DetailSubtitle1" parent="Subtitle1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="DetailBody1" parent="Body1">
+        <item name="fontFamily">@font/pt_serif</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="DetailBody2" parent="Body2">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/gray500</item>
+    </style>
+    <style name="DetailButton" parent="Button">
+        <item name="fontFamily">@font/open_sans_bold</item>
+    </style>
+    <style name="DetailOverline" parent="Overline">
+        <item name="fontFamily">@font/open_sans_bold</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <!-- Section -->
+    <style name="SectionSubtitle1" parent="Subtitle1">
+        <item name="fontFamily">@font/open_sans</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+</resources>

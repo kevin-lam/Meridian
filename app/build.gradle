@@ -1,4 +1,6 @@
 apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
 
 android {
     compileSdkVersion rootProject.ext.compileSdkVersion
@@ -10,15 +12,23 @@ android {
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
     }
     buildTypes {
         debug {
             minifyEnabled false
-            buildConfigField "String", "NytTopStoriesAPIKey", "\"${NytTopStoriesAPIKey}\""
+            buildConfigField "String", "TOP_STORIES_URL", "\"${NytTopStoriesUrl}\""
+            buildConfigField "String", "TOP_STORIES_API_KEY", "\"${NytTopStoriesAPIKey}\""
+            debuggable true
         }
         release {
             minifyEnabled true
-            buildConfigField "String", "NytTopStoriesAPIKey", "\"${NytTopStoriesAPIKey}\""
+            buildConfigField "String", "TOP_STORIES_URL", "\"${NytTopStoriesUrl}\""
+            buildConfigField "String", "TOP_STORIES_API_KEY", "\"${NytTopStoriesAPIKey}\""
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -31,9 +41,62 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:support-v4:$rootProject.supportLibraryVersion"
+    implementation "com.android.support:recyclerview-v7:$rootProject.supportLibraryVersion"
+    implementation "com.android.support.constraint:constraint-layout:$rootProject.constraintLayoutVersion"
+    implementation "com.android.support:design:$rootProject.supportLibraryVersion"
+
+    // Architectural components
+    implementation "android.arch.lifecycle:livedata:$rootProject.architecturalComponentsVersion"
+    implementation "android.arch.lifecycle:viewmodel:$rootProject.architecturalComponentsVersion"
+    implementation "android.arch.lifecycle:extensions:$rootProject.architecturalComponentsVersion"
+    implementation "android.arch.persistence.room:runtime:$rootProject.architecturalComponentsVersion"
+    annotationProcessor "android.arch.persistence.room:compiler:$rootProject.architecturalComponentsVersion"
+    implementation "android.arch.persistence.room:rxjava2:$rootProject.architecturalComponentsVersion"
+    testImplementation "android.arch.persistence.room:testing:$rootProject.architecturalComponentsVersion"
+
+    // Dependency injection
+    implementation "com.google.dagger:dagger-android:$rootProject.daggerVersion"
+    implementation "com.google.dagger:dagger-android-support:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-android-processor:$rootProject.daggerVersion"
+    annotationProcessor "com.google.dagger:dagger-compiler:$rootProject.daggerVersion"
+
+    // Utility
+    implementation "com.jakewharton:butterknife:$rootProject.butterknifeVersion"
+    annotationProcessor "com.jakewharton:butterknife-compiler:$rootProject.butterknifeVersion"
+    implementation "com.github.bumptech.glide:glide:$rootProject.glideVersion"
+    annotationProcessor "com.github.bumptech.glide:compiler:$rootProject.glideVersion"
+    implementation ("com.github.bumptech.glide:recyclerview-integration:$rootProject.glideVersion") {
+        transitive = false
+    }
+    implementation "joda-time:joda-time:$rootProject.jodaVersion"
+    implementation "com.android.support:customtabs:$rootProject.supportLibraryVersion"
+
+    // Networking
+    implementation "com.squareup.retrofit2:retrofit:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:converter-gson:$rootProject.retrofitVersion"
+    implementation "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofitVersion"
+    implementation "com.google.code.gson:gson:$rootProject.gsonVersion"
+    implementation "io.reactivex.rxjava2:rxjava:$rootProject.rxjavaVersion"
+    implementation "io.reactivex.rxjava2:rxandroid:$rootProject.rxAndroidVersion"
+    implementation "com.squareup.okhttp3:okhttp:$rootProject.okhttpVersion"
+
+    // Logging
+    implementation "com.squareup.okhttp3:logging-interceptor:$rootProject.okhttpVersion"
+    implementation "com.jakewharton.timber:timber:$rootProject.timberVersion"
+    implementation "com.crashlytics.sdk.android:crashlytics:$rootProject.crashlyticsVersion"
 
     // Testing
     testImplementation "junit:junit:$rootProject.junitVersion"
-    androidTestImplementation "com.android.support.test:runner:$rootProject.junitRunnerVersion"
+    testImplementation "org.hamcrest:hamcrest-library:$rootProject.hamcrestVersion"
+    androidTestImplementation "android.arch.core:core-testing:$rootProject.architecturalComponentsVersion"
+    androidTestImplementation "com.android.support.test:rules:$rootProject.junitRulesVersion"
+    testImplementation "com.android.support.test:runner:$rootProject.junitRunnerVersion"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:$rootProject.expressoVersion"
+    androidTestImplementation "com.android.support.test.espresso:espresso-contrib:$rootProject.expressoVersion"
+    androidTestImplementation "com.android.support.test.uiautomator:uiautomator-v18:$rootProject.uiAutomatorVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-android:$rootProject.leakCanaryVersion"
+    releaseImplementation "com.squareup.leakcanary:leakcanary-android-no-op:$rootProject.leakCanaryVersion"
+    debugImplementation "com.squareup.leakcanary:leakcanary-support-fragment:$rootProject.leakCanaryVersion"
+    testImplementation "com.squareup.okhttp3:mockwebserver:$rootProject.okhttpVersion"
 }
