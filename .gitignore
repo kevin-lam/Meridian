@@ -52,3 +52,7 @@ captures/
 
 # Google Services (e.g. APIs or Firebase)
 google-services.json
+
+# Built apk
+app/release/*
+app/debug/*
