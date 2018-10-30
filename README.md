@@ -16,7 +16,7 @@ This is an Android application which displays news articles retrieved from the N
 - [Room](https://developer.android.com/topic/libraries/architecture/room)
 - [Retrofit](https://github.com/square/retrofit)
 - [Glide](https://github.com/bumptech/glide)
-- [RxPermissions](https://github.com/tbruyelle/RxPermissions)
+- [Gson](https://github.com/google/gson)
 
 ## Testing
 - [Expresso](https://developer.android.com/training/testing/espresso/)
