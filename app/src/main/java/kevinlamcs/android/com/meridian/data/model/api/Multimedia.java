@@ -9,16 +9,37 @@ import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 public final class Multimedia implements Serializable{
 
-    static final class Photo {
-        public static final int STANDARD_THUMBNAIL = 0;
-        public static final int LARGE_THUMBNAIL = 1;
-        public static final int NORMAL = 2;
-        public static final int MEDIUM = 3;
-        public static final int JUMBO = 4;
+    public enum PhotoType {
+        STANDARD_THUMBNAIL(0), LARGE_THUMBNAIL(1), NORMAL(2), MEDIUM(3), JUMBO(4);
+
+        private final int value;
+        static String[] formats = new String[5];
+        static {
+            formats[0] = "Standard Thumbnail";
+            formats[1] = "thumbLarge";
+            formats[2] = "Normal";
+            formats[3] = "mediumThreeByTwo210";
+            formats[4] = "superJumbo";
+        }
+        PhotoType(int value) {
+            this.value = value;
+        }
+
+
+        @Override
+        public String toString() {
+            return formats[this.value];
+        }
+
+        public int valueOf() {
+            return ordinal();
+        }
     }
 
     public Multimedia() {

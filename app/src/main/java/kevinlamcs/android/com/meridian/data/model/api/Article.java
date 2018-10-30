@@ -305,30 +305,43 @@ public class Article implements Serializable {
     }
 
     public String getStandardThumbnailUrl() {
-        return getPhotoUrl(Multimedia.Photo.STANDARD_THUMBNAIL);
+        return getPhotoUrl(Multimedia.PhotoType.STANDARD_THUMBNAIL);
     }
 
     public String getLargeThumbnailUrl() {
-        return getPhotoUrl(Multimedia.Photo.LARGE_THUMBNAIL);
+        return getPhotoUrl(Multimedia.PhotoType.LARGE_THUMBNAIL);
     }
 
     public String getNormalPhotoUrl() {
-        return getPhotoUrl(Multimedia.Photo.NORMAL);
+        return getPhotoUrl(Multimedia.PhotoType.NORMAL);
     }
 
     public String getMediumPhotoUrl() {
-        return getPhotoUrl(Multimedia.Photo.MEDIUM);
+        return getPhotoUrl(Multimedia.PhotoType.MEDIUM);
     }
 
     public String getJumboPhotoUrl() {
-        return getPhotoUrl(Multimedia.Photo.JUMBO);
+        return getPhotoUrl(Multimedia.PhotoType.JUMBO);
     }
 
-    private String getPhotoUrl(int type) {
+    private String getPhotoUrl(Multimedia.PhotoType type) {
         List<Multimedia> photoList = getMultimedia();
-        if (!photoList.isEmpty()) {
-            return photoList.get(type).getUrl();
+        if (!photoList.isEmpty() && hasPhotoUrlOfType(photoList, type)) {
+            return photoList.get(type.valueOf()).getUrl();
         }
         return "";
+    }
+
+    private boolean hasPhotoUrlOfType(List<Multimedia> photoList, Multimedia.PhotoType type) {
+        if (photoList.size() <= type.valueOf()) {
+            return false;
+        }
+
+        for (Multimedia photo : photoList) {
+            if (photo.getFormat().equals(type.toString())) {
+                return true;
+            }
+        }
+        return false;
     }
 }
