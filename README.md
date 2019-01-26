@@ -3,6 +3,8 @@
 
 This is an Android application which displays news articles retrieved from the New York Times. It contains features such as offline support and a clean interface.
 
+<a href='https://play.google.com/store/apps/details?id=kevinlamcs.android.com.meridian&pcampaignid=MKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' width='160' height='64'/></a>
+
 ## Architectural Pattern
 - MVVM
 - Single Activity, Multiple Fragments
