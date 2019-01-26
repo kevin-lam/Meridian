@@ -53,7 +53,7 @@ public class HomeTest {
     @Test
     public void articleListingNotEmptyOnStart() {
         UiObject articleEntry = device.findObject(new UiSelector().resourceId("R.id.article_entry"));
-        articleEntry.waitForExists(100);
+        articleEntry.waitForExists(1000);
 
         RecyclerView recyclerView = mainActivityTestRule.getActivity().findViewById(R.id.articles);
         assertThat(recyclerView.getAdapter().getItemCount(), is(not(equalTo(0))));
@@ -62,7 +62,7 @@ public class HomeTest {
     @Test
     public void clickArticleEntryDisplaysArticle() {
         UiObject articleEntry = device.findObject(new UiSelector().resourceId("R.id.article_entry"));
-        articleEntry.waitForExists(100);
+        articleEntry.waitForExists(1000);
 
         onView(withId(R.id.articles)).perform(actionOnItemAtPosition(0, click()));
         onView(withId(R.id.article)).check(matches(isDisplayed()));
